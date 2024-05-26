@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/home_page/home_screen.dart';
+import 'package:flutter_application_1/screens/login_page/login_screen.dart';
+import 'package:flutter_application_1/screens/music_list_page/music_list_screen.dart';
 import 'package:flutter_application_1/styles/color_list.dart';
 
 void main() {
@@ -18,11 +20,17 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
         appBarTheme: AppBarTheme(
-          backgroundColor: ColorList.parimayColor,
+          backgroundColor: ColorList.priimayColor,
         ),
         scaffoldBackgroundColor: ColorList.scarfoldBackgroundColor,
       ),
       home: HomeScreen(),
+      initialRoute: "/login",
+      routes: {
+        '/login' : (context) => LoginScreen(),
+        '/musiclist' : (context) => MusicListScreen(),
+        '/home' : (context) => HomeScreen(),
+      },
     );
   }
 }
