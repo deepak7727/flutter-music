@@ -3,7 +3,12 @@ import 'package:flutter/material.dart';
 class TextfiledWidget extends StatefulWidget {
   String title;
   TextEditingController controller;
-  TextfiledWidget({super.key, required this.title, required this.controller});
+
+  TextfiledWidget({
+    super.key,
+    required this.title,
+    required this.controller,
+  });
 
   @override
   State<TextfiledWidget> createState() => _TextfiledWidgetState();

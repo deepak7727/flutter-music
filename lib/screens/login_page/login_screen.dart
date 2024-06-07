@@ -63,6 +63,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     title: "Login",
                     icon: Icons.login,
                   ),
+
+                  InkWell(onTap: (){
+                    Navigator.pushNamed(context, '/signup');
+                  },child: Text("signup"),),
                 ],
               ),
             ),

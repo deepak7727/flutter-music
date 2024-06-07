@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/home_page/home_screen.dart';
 import 'package:flutter_application_1/screens/login_page/login_screen.dart';
 import 'package:flutter_application_1/screens/music_list_page/music_list_screen.dart';
+import 'package:flutter_application_1/screens/signup_page/signup_screen.dart';
 import 'package:flutter_application_1/styles/color_list.dart';
 
 void main() {
@@ -11,7 +12,6 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,10 +24,10 @@ class MyApp extends StatelessWidget {
         ),
         scaffoldBackgroundColor: ColorList.scarfoldBackgroundColor,
       ),
-      home: HomeScreen(),
       initialRoute: "/login",
       routes: {
         '/login' : (context) => LoginScreen(),
+        '/signup' : (context) => SignupScreen(),
         '/musiclist' : (context) => MusicListScreen(),
         '/home' : (context) => HomeScreen(),
       },
