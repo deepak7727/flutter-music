@@ -35,10 +35,6 @@ class MyApp extends StatelessWidget {
   Size getAppSize(context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    print("***************");
-    print("$height * $width");
-    print("***************");
-
     if (width > 600 && height > 1000) {
       return const Size(800, 1280);
     } else {

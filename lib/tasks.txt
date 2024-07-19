@@ -1,6 +1,0 @@
-1 : Add music player
-2 : connect firebase
-3 : Add Video player
-
-
-Get permission from internal storage

@@ -12,3 +12,11 @@ developer experieince in 0.6 months
 - Screenutils
 - getx for state management 
 - spotify api
+
+
+1 : Add music player
+2 : connect firebase
+3 : Add Video player
+
+
+Get permission from internal storage

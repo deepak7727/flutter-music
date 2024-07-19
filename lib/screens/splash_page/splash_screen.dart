@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(Duration(seconds: 2), () {
-        Navigator.pushNamedAndRemoveUntil(context, RouteUtils.login,(route) => false,);
+        Navigator.pushReplacementNamed(context, RouteUtils.login);
       });
     });
     super.initState();

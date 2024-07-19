@@ -76,8 +76,10 @@ class _SignupScreenState extends State<SignupScreen> {
                     SizedBox(height: 10.h),
                     GradientButton(
                       onPressed: () {
-                        Navigator.pushReplacementNamed(
-                            context, RouteUtils.login);
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, RouteUtils.login,
+                            (route) => false,
+                            );
                       },
                       text: "Go Login",
                       gradient: LinearGradient(colors: [
