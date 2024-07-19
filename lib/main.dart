@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/home_page/home_screen.dart';
-import 'package:flutter_application_1/screens/login_page/login_screen.dart';
-import 'package:flutter_application_1/screens/music_list_page/music_list_screen.dart';
-import 'package:flutter_application_1/screens/signup_page/signup_screen.dart';
 import 'package:flutter_application_1/styles/color_list.dart';
+import 'package:flutter_application_1/utils/global/route_utils.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,23 +12,37 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-        appBarTheme: AppBarTheme(
-          backgroundColor: ColorList.priimayColor,
+    return ScreenUtilInit(
+      designSize: getAppSize(context),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          useMaterial3: true,
+          appBarTheme: AppBarTheme(
+            backgroundColor: ColorList.priimayColor,
+            centerTitle: true,
+          ),
+          scaffoldBackgroundColor: ColorList.scarfoldBackgroundColor,
         ),
-        scaffoldBackgroundColor: ColorList.scarfoldBackgroundColor,
+        initialRoute: RouteUtils.splash,
+        routes: RouteUtils.routes,
       ),
-      initialRoute: "/login",
-      routes: {
-        '/login' : (context) => LoginScreen(),
-        '/signup' : (context) => SignupScreen(),
-        '/musiclist' : (context) => MusicListScreen(),
-        '/home' : (context) => HomeScreen(),
-      },
     );
+  }
+
+  Size getAppSize(context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    print("***************");
+    print("$height * $width");
+    print("***************");
+
+    if (width > 600 && height > 1000) {
+      return const Size(800, 1280);
+    } else {
+      return const Size(430, 932);
+    }
   }
 }

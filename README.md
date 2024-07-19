@@ -4,13 +4,11 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Music player applciation is for basiclly to play song from spotify api 
+and easy to implement in flutter so its developed in fluuter 
 
-A few resources to get you started if this is your first Flutter project:
+developer experieince in 0.6 months 
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Screenutils
+- getx for state management 
+- spotify api

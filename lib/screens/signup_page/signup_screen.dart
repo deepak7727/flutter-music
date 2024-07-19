@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/utils/textfiled_widget.dart';
-
-import '../../utils/button_widget.dart';
+import 'package:flutter_application_1/styles/color_list.dart';
+import 'package:flutter_application_1/utils/custome_button_widget.dart';
+import 'package:flutter_application_1/utils/glasseffect_widget.dart';
+import 'package:flutter_application_1/utils/global/route_utils.dart';
+import 'package:flutter_application_1/utils/gradient_button.dart';
+import 'package:flutter_application_1/utils/image_collections.dart';
+import 'package:flutter_application_1/utils/inert_color_text_widget.dart';
+import 'package:flutter_application_1/utils/modern_textfield_widget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -16,53 +22,72 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
+      body: Stack(
         children: [
-          // signup
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 50.0,
-            ),
-            child: Image.asset(
-              "assest/images/signup.png",
-              fit: BoxFit.cover,
+          Image.asset(
+            ImageCollections.bg_singupImage,
+            fit: BoxFit.fitHeight,
+            height: double.maxFinite,
+          ),
+          Positioned(
+            left: 50.sw,
+            top: 5.sh,
+            child: ColoredBox(
+              color: ColorList.white,
+              child: SizedBox(
+                height: 50,
+                width: 50,
+              ),
             ),
           ),
-
-          // Login Page
-          Container(
-            margin: EdgeInsets.symmetric(
-              horizontal: 40.0,
-              vertical: 30.0,
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                // Login
-                Text(
-                  "Signup page",
-                  style: TextStyle(
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                  ),
+          Center(
+            child: GlassEffectWidget(
+              height: 380,
+              width: 300,
+              child: Container(
+                margin: EdgeInsets.symmetric(
+                  horizontal: 20.w,
+                  vertical: 15.w,
                 ),
-
-                TextfiledWidget(
-                  controller: emailController,
-                  title: "Enter Email",
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    InvertedColorText(
+                        backgroundColor: ColorList.black, text: "Signup Page"),
+                    SizedBox(height: 20.h),
+                    ModernTextFieldWidget(
+                      controller: emailController,
+                      hintText: "Enter Email",
+                    ),
+                    SizedBox(height: 10.h),
+                    ModernTextFieldWidget(
+                      controller: passwordController,
+                      hintText: "Enter Password",
+                    ),
+                    SizedBox(height: 10.h),
+                    CustomSquareButton(
+                      color: Colors.green,
+                      onPressed: () {
+                        // login method
+                      },
+                      text: "Signup",
+                      textColor: ColorList.success,
+                    ),
+                    SizedBox(height: 10.h),
+                    GradientButton(
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(
+                            context, RouteUtils.login);
+                      },
+                      text: "Go Login",
+                      gradient: LinearGradient(colors: [
+                        Colors.black26,
+                        Colors.black87,
+                      ]),
+                    ),
+                  ],
                 ),
-
-                TextfiledWidget(
-                  controller: passwordController,
-                  title: "Enter Password",
-                ),
-
-                ButtonWidget(
-                  title: "Signup",
-                  icon: Icons.login,
-                ),
-              ],
+              ),
             ),
           ),
         ],
