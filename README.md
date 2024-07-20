@@ -4,10 +4,13 @@ A new Flutter project.
 
 ## Getting Started
 
-Music player applciation is for basiclly to play song from spotify api 
-and easy to implement in flutter so its developed in fluuter 
+it's application is for basically to play song from spotify api 
+and easy to implement apis in flutter so its developed in fluuter 
 
-developer experieince in 0.6 months 
+developer experience - 0.6 months 
+
+project started on 7-May 2024
+Project End info - 6 months (as per time have).
 
 - Screenutils
 - getx for state management 
