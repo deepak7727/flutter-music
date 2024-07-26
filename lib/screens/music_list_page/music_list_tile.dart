@@ -1,0 +1,41 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:on_audio_query/on_audio_query.dart';
+
+// ignore: must_be_immutable
+class MusicListTile extends StatefulWidget {
+  SongModel song;
+  MusicListTile({super.key, required this.song});
+
+  @override
+  State<MusicListTile> createState() => _MusicListTileState();
+}
+
+class _MusicListTileState extends State<MusicListTile> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding : EdgeInsets.all(10.w),
+      decoration: BoxDecoration(
+        // border: Border.all(),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Expanded(
+            child: Text(
+              widget.song.title,
+            ),
+          ),
+          Text(
+            Duration(milliseconds: widget.song.duration!).toString(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String formatTime(int seconds) {
+    return '${(Duration(seconds: seconds))}'.split('.')[0].padLeft(8, '0');
+  }
+}

@@ -42,7 +42,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    InvertedColorText(backgroundColor: ColorList.white, text: "Login Page"),
+                    InvertedColorText(
+                        backgroundColor: ColorList.white, text: "Login Page"),
                     SizedBox(height: 20.h),
                     ModernTextFieldWidget(
                       controller: emailController,
@@ -58,6 +59,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       color: Colors.green,
                       onPressed: () {
                         // login method
+                        if (emailController.text == "A" &&
+                            passwordController.text == "A") {
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, RouteUtils.home, (route) => false);
+                        } else {
+                          print(
+                              "*************** ${emailController.text} : ${passwordController.text} *************");
+                        }
                       },
                       text: "Login",
                       textColor: ColorList.success,
@@ -65,8 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(height: 10.h),
                     GradientButton(
                       onPressed: () {
-                        Navigator.pushNamed(
-                            context, RouteUtils.signup);
+                        Navigator.pushNamed(context, RouteUtils.signup);
                       },
                       text: "Sign up",
                       gradient: LinearGradient(colors: [

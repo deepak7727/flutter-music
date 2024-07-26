@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/music_list_page/music_list_screen.dart';
+import 'package:flutter_application_1/styles/color_list.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -11,8 +14,9 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final OnAudioQuery _audioQuery = OnAudioQuery();
-  List songs = [];
+  List<SongModel> songs = [];
   bool permissionGranded = false;
+  int currentPage = 0;
 
   @override
   void initState() {
@@ -45,12 +49,69 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("HomeScreen"),
-      ),
-      body: Center(
-        child: Text("${songs.length}"),
+      body: [
+        MusicListScreen(
+          songs: songs,
+        ),
+        Center(
+          child: Container(
+            child: Text("Music Player"),
+          ),
+        ),
+        Center(
+          child: Container(
+            child: Text("settings"),
+          ),
+        ),
+      ][currentPage],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentPage,
+        onTap: (index) {
+          setState(() {
+            currentPage = index;
+          });
+        },
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.music_note,
+            ),
+            label: "Music List",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.music_video),
+            label: "Music ALbum",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: "Setting",
+          ),
+        ],
+        backgroundColor: ColorList.tileBackgroundColor,
+        selectedFontSize: 18.sp,
+        selectedLabelStyle: TextStyle(
+          color: ColorList.white,
+        ),
+        selectedIconTheme: IconThemeData(
+          color: ColorList.white,
+        ),
+        iconSize: 25.h,
       ),
     );
   }
 }
+
+
+// ListView.builder(
+//         itemCount: songs.length,
+//         shrinkWrap: true,
+//         itemBuilder: (context, index) {
+//           return Container(
+//             padding: EdgeInsets.all(10.w),
+//             decoration: BoxDecoration(
+//               border: Border.all(),
+//             ),
+//             child: Text(songs[index].title),
+//           );
+//         },
+//       )

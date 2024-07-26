@@ -17,7 +17,6 @@ class RouteUtils{
       RouteUtils.splash : (context) => SplashScreen(),
       RouteUtils.login : (context) => LoginScreen(),
       RouteUtils.signup : (context) => SignupScreen(),
-      RouteUtils.musicList : (context) => MusicListScreen(),
       RouteUtils.home : (context) => HomeScreen(),
     };
   }
