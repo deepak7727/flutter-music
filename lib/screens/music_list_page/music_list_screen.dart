@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/music_list_page/music_list_tile.dart';
+import 'package:flutter_application_1/screens/music_list_page/no_music_widget.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 // ignore: must_be_immutable
@@ -18,16 +19,18 @@ class _MusicListScreenState extends State<MusicListScreen> {
       appBar: AppBar(
         title: Text("Music"),
       ),
-      body: ListView.separated(
-        separatorBuilder: (context, index) => Divider(),
-        itemCount: widget.songs.length,
-        shrinkWrap: true,
-        itemBuilder: (context, index) {
-          return MusicListTile(
-            song: widget.songs[index],
-          );
-        },
-      ),
+      body: (widget.songs.length > 0)
+          ? ListView.separated(
+              separatorBuilder: (context, index) => Divider(),
+              itemCount: widget.songs.length,
+              shrinkWrap: true,
+              itemBuilder: (context, index) {
+                return MusicListTile(
+                  song: widget.songs[index],
+                );
+              },
+            )
+          : NoMusicWidget(),
     );
   }
 }

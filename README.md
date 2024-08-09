@@ -14,9 +14,12 @@ developer experieince in 0.6 months
 - spotify api
 
 
-1 : Add music player
-2 : connect firebase
-3 : Add Video player
+1 : Add music player - on Progress
+2 : connect firebase - on Progress 
+3 : Add Video player - on plan
+4 : getx controller - on plan
+5 : spotify player - on plan
+6 : create widget for home screen - on plan
 
 
 Get permission from internal storage

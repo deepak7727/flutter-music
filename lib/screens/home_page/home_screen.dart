@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/music_list_page/music_list_screen.dart';
+import 'package:flutter_application_1/screens/setting_page/setting_screen.dart';
 import 'package:flutter_application_1/styles/color_list.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -58,11 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Text("Music Player"),
           ),
         ),
-        Center(
-          child: Container(
-            child: Text("settings"),
-          ),
-        ),
+        SettingScreen(),
       ][currentPage],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentPage,
@@ -100,18 +97,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-
-// ListView.builder(
-//         itemCount: songs.length,
-//         shrinkWrap: true,
-//         itemBuilder: (context, index) {
-//           return Container(
-//             padding: EdgeInsets.all(10.w),
-//             decoration: BoxDecoration(
-//               border: Border.all(),
-//             ),
-//             child: Text(songs[index].title),
-//           );
-//         },
-//       )

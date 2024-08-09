@@ -17,7 +17,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
-    print("********** appstate initstate ***********");
+    debugPrint('****** MyAppInitState *****');
     super.initState();
   }
 
@@ -32,12 +32,12 @@ class _MyAppState extends State<MyApp> {
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
           appBarTheme: AppBarTheme(
-            backgroundColor: ColorList.priimayColor,
+            backgroundColor: ColorList.primaryColor,
             centerTitle: true,
             titleTextStyle: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 25,
-            )
+            ),
           ),
           scaffoldBackgroundColor: ColorList.scarfoldBackgroundColor,
         ),

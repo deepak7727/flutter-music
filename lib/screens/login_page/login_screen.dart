@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/styles/color_list.dart';
 import 'package:flutter_application_1/utils/custome_button_widget.dart';
@@ -17,8 +18,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController emailController = TextEditingController(text: (kDebugMode)? "A" : " " );
+  TextEditingController passwordController = TextEditingController(text: (kDebugMode)? "A" : " ");
 
   @override
   Widget build(BuildContext context) {
@@ -30,17 +31,17 @@ class _LoginScreenState extends State<LoginScreen> {
             fit: BoxFit.fitHeight,
             height: double.maxFinite,
           ),
-          Center(
-            child: GlassEffectWidget(
-              height: 380,
-              width: 300,
+          GlassEffectWidget(
+            child: Center(
               child: Container(
                 margin: EdgeInsets.symmetric(
                   horizontal: 20.w,
                   vertical: 15.w,
                 ),
+                width: 250.w,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     InvertedColorText(
                         backgroundColor: ColorList.white, text: "Login Page"),
@@ -48,21 +49,24 @@ class _LoginScreenState extends State<LoginScreen> {
                     ModernTextFieldWidget(
                       controller: emailController,
                       hintText: "Enter Email",
+                      prefixIcon: Icons.email_outlined,
                     ),
                     SizedBox(height: 10.h),
                     ModernTextFieldWidget(
                       controller: passwordController,
                       hintText: "Enter Password",
+                      prefixIcon: Icons.key_rounded,
                     ),
                     SizedBox(height: 10.h),
                     CustomSquareButton(
                       color: Colors.green,
                       onPressed: () {
-                        // login method
+                        
+                        Navigator.pushNamedAndRemoveUntil(
+                            context, RouteUtils.home, (route) => false);
+                        
                         if (emailController.text == "A" &&
                             passwordController.text == "A") {
-                          Navigator.pushNamedAndRemoveUntil(
-                              context, RouteUtils.home, (route) => false);
                         } else {
                           print(
                               "*************** ${emailController.text} : ${passwordController.text} *************");

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/utils/global/route_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -14,23 +15,30 @@ class MusicListTile extends StatefulWidget {
 class _MusicListTileState extends State<MusicListTile> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding : EdgeInsets.all(10.w),
-      decoration: BoxDecoration(
-        // border: Border.all(),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Text(
-              widget.song.title,
+    return InkWell(
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          RouteUtils.player,
+          arguments: widget.song,
+        );
+      },
+      child: Container(
+        padding: EdgeInsets.all(10.w),
+        decoration: BoxDecoration(),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: Text(
+                widget.song.title,
+              ),
             ),
-          ),
-          Text(
-            Duration(milliseconds: widget.song.duration!).toString(),
-          ),
-        ],
+            Text(
+              Duration(milliseconds: widget.song.duration!).toString(),
+            ),
+          ],
+        ),
       ),
     );
   }
