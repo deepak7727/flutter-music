@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomSquareButton extends StatelessWidget {
   final String text;
+  final EdgeInsets? padding;
   final VoidCallback onPressed;
-  final Color color;
+  final Color buttonColor;
   final Color textColor;
   final Color borderColor;
   final double borderWidth;
 
   CustomSquareButton({
     required this.text,
+    this.padding,
     required this.onPressed,
-    required this.color,
+    required this.buttonColor,
     required this.textColor,
     this.borderColor = Colors.transparent,
     this.borderWidth = 0.0,
@@ -19,24 +22,29 @@ class CustomSquareButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(5),
-      child: ElevatedButton(
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          iconColor: color,
-          padding: EdgeInsets.all(16.0),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-            side: BorderSide(color: borderColor, width: borderWidth),
-          ),
-          elevation: 5,
+    return ElevatedButton(
+      onPressed: onPressed,
+      style: ElevatedButton.styleFrom(
+        iconColor: buttonColor,
+        backgroundColor: buttonColor,
+        padding: padding ??
+            EdgeInsets.symmetric(
+              horizontal: 20.w,
+              vertical: 10.h,
+            ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(30.r),
+          side: BorderSide(color: borderColor, width: borderWidth),
         ),
-        child: Text(text, style: TextStyle(
-            color: textColor,
-            fontSize: 16.0,
-            fontWeight: FontWeight.bold,
-          ),),
+        elevation: 5,
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          color: textColor,
+          fontSize: 16.0,
+          fontWeight: FontWeight.bold,
+        ),
       ),
     );
   }

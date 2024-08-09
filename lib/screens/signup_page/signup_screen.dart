@@ -65,21 +65,28 @@ class _SignupScreenState extends State<SignupScreen> {
                       hintText: "Enter Password",
                     ),
                     SizedBox(height: 10.h),
-                    CustomSquareButton(
-                      color: Colors.green,
-                      onPressed: () {
-                        // login method
-                      },
-                      text: "Signup",
-                      textColor: ColorList.success,
+                    Row(
+                      children: [
+                        Expanded(
+                          child: CustomSquareButton(
+                            text: "Signup",
+                            buttonColor: Colors.white,
+                            textColor: ColorList.success,
+                            onPressed: () {
+                              // login method
+                            },
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(height: 10.h),
                     GradientButton(
                       onPressed: () {
                         Navigator.pushNamedAndRemoveUntil(
-                            context, RouteUtils.login,
-                            (route) => false,
-                            );
+                          context,
+                          RouteUtils.login,
+                          (route) => false,
+                        );
                       },
                       text: "Go Login",
                       gradient: LinearGradient(colors: [

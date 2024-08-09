@@ -6,7 +6,7 @@ class ColorList{
   static const Color white = Color(0xFFFFFFFF); // Blue 500
   
   static const Color primaryColor = Color(0xFF0984e3); // Blue 500
-  static const Color scarfoldBackgroundColor = Color(0xffdfe6e9); // Blue 100
+  static const Color scaffoldBackgroundColor = Color(0xffdfe6e9); // Blue 100
   static const Color success = Color(0xFF4CAF50); // Green 500
   static const Color danger = Color(0xFFE53935); // Red 600
 
