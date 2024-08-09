@@ -2,7 +2,7 @@ String imagePath  = "assets/images/";
 String lottiePath  = "assets/lottie/";
 String iconPath  = "assets/icon/";
 
-class ImageCollections{
+class ImageRes{
 
   // image
   static final String loginImage = "${imagePath}login.png";

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/styles/color_list.dart';
-import 'package:flutter_application_1/utils/global/global_data.dart';
+import 'package:flutter_application_1/utils/global/global_res.dart';
 import 'package:flutter_application_1/utils/global/route_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -21,7 +21,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  /// 1) our themeMode "state" field
   Key key = UniqueKey();
 
   @override
@@ -58,7 +57,7 @@ class _MyAppState extends State<MyApp> {
                 scrolledUnderElevation: 0.0,
                 iconTheme: IconThemeData(
                   color: ColorList.white,
-                  size: 30.w,
+                  size: 30,
                 )),
             scaffoldBackgroundColor: ColorList.scaffoldBackgroundColor,
           ),

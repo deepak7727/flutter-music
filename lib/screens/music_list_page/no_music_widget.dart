@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/utils/image_collections.dart';
+import 'package:flutter_application_1/utils/global/image_res.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 
@@ -16,7 +16,7 @@ class _NoMusicWidgetState extends State<NoMusicWidget> {
     return Center(
       child: Container(
         child: Lottie.asset(
-          ImageCollections.lottieEmptyList,
+          ImageRes.lottieEmptyList,
           height: 200.h,
         ),
       ),

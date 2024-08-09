@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/player_page/widget/player_action_button.dart';
 import 'package:flutter_application_1/styles/styles.dart';
-import 'package:flutter_application_1/utils/image_collections.dart';
+import 'package:flutter_application_1/utils/global/image_res.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -59,7 +59,7 @@ class _PlayerScreenState extends State<PlayerScreen>
               ),
               SizedBox(height: 30.h),
               Image.asset(
-                ImageCollections.loginImage,
+                ImageRes.loginImage,
                 height: 300.h,
               ),
               Expanded(child: SizedBox()),

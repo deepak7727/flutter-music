@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/styles/color_list.dart';
-import 'package:flutter_application_1/utils/custome_button_widget.dart';
+import 'package:flutter_application_1/utils/common/custome_button_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TestPageScreen extends StatefulWidget {

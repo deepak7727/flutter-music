@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/styles/color_list.dart';
-import 'package:flutter_application_1/utils/custome_button_widget.dart';
-import 'package:flutter_application_1/utils/glasseffect_widget.dart';
+import 'package:flutter_application_1/utils/common/custome_button_widget.dart';
+import 'package:flutter_application_1/utils/common/glasseffect_widget.dart';
+import 'package:flutter_application_1/utils/common/inert_color_text_widget.dart';
+import 'package:flutter_application_1/utils/common/modern_textfield_widget.dart';
+import 'package:flutter_application_1/utils/global/image_res.dart';
 import 'package:flutter_application_1/utils/global/route_utils.dart';
-import 'package:flutter_application_1/utils/gradient_button.dart';
-import 'package:flutter_application_1/utils/image_collections.dart';
-import 'package:flutter_application_1/utils/inert_color_text_widget.dart';
-import 'package:flutter_application_1/utils/modern_textfield_widget.dart';
+import 'package:flutter_application_1/utils/common/gradient_button.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -25,7 +25,7 @@ class _SignupScreenState extends State<SignupScreen> {
       body: Stack(
         children: [
           Image.asset(
-            ImageCollections.bg_singupImage,
+            ImageRes.bg_singupImage,
             fit: BoxFit.fitHeight,
             height: double.maxFinite,
           ),
