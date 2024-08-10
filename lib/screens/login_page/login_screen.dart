@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/services/firebase_auth_service.dart';
 import 'package:flutter_application_1/styles/color_list.dart';
+import 'package:flutter_application_1/utils/common/common_method.dart';
 import 'package:flutter_application_1/utils/common/custome_button_widget.dart';
 import 'package:flutter_application_1/utils/common/glasseffect_widget.dart';
 import 'package:flutter_application_1/utils/common/inert_color_text_widget.dart';
@@ -22,6 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
       TextEditingController(text: (kDebugMode) ? "A" : " ");
   TextEditingController passwordController =
       TextEditingController(text: (kDebugMode) ? "A" : " ");
+  final loginKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -43,61 +46,81 @@ class _LoginScreenState extends State<LoginScreen> {
                     horizontal: 20.w,
                     vertical: 15.w,
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      InvertedColorText(
-                          backgroundColor: ColorList.white, text: "Login Page"),
-                      SizedBox(height: 20.h),
-                      ModernTextFieldWidget(
-                        controller: emailController,
-                        hintText: "Enter Email",
-                        prefixIcon: Icons.email_outlined,
-                      ),
-                      SizedBox(height: 10.h),
-                      ModernTextFieldWidget(
-                        controller: passwordController,
-                        hintText: "Enter Password",
-                        prefixIcon: Icons.key_rounded,
-                      ),
-                      SizedBox(height: 15.h),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: CustomSquareButton(
-                              text: "Login",
-                              textColor: ColorList.white,
-                              buttonColor: Colors.green,
-                              onPressed: () {
-                                Navigator.pushNamedAndRemoveUntil(
-                                    context, RouteUtils.home, (route) => false);
+                  child: Form(
+                    key: loginKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        InvertedColorText(
+                            backgroundColor: ColorList.white,
+                            text: "Login Page"),
+                        SizedBox(height: 20.h),
+                        ModernTextFieldWidget(
+                          controller: emailController,
+                          hintText: "Enter Email",
+                          prefixIcon: Icons.email_outlined,
+                        ),
+                        SizedBox(height: 10.h),
+                        ModernTextFieldWidget(
+                          controller: passwordController,
+                          hintText: "Enter Password",
+                          prefixIcon: Icons.key_rounded,
+                        ),
+                        SizedBox(height: 15.h),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: CustomSquareButton(
+                                text: "Login",
+                                textColor: ColorList.white,
+                                buttonColor:
+                                    const Color.fromRGBO(76, 175, 80, 1),
+                                onPressed: () async {
+                                  if (loginKey.currentState!.validate()) {
+                                    if (emailController.text.isNotEmpty &&
+                                        passwordController.text.isNotEmpty) {
+                                      String? res = await FirebaseAuthService
+                                          .instance
+                                          .login(
+                                        email: emailController.text,
+                                        password: passwordController.text,
+                                      );
 
-                                if (emailController.text == "A" &&
-                                    passwordController.text == "A") {
-                                } else {
-                                  print(
-                                      "*************** ${emailController.text} : ${passwordController.text} *************");
-                                }
-                              },
+                                      debugPrintLocal(
+                                          '****** res =  ${res} *****');
+                                      if (res == "Success ") {
+                                        Navigator.pushNamedAndRemoveUntil(
+                                            context,
+                                            RouteUtils.home,
+                                            (route) => false);
+                                      }
+                                    }
+                                  } else {
+                                    showToast(
+                                        title: "login issue",
+                                        message: "message message");
+                                  }
+                                },
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10.h),
-                      GradientButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, RouteUtils.signup);
-                        },
-                        text: "Sign up",
-                        gradient: LinearGradient(
-                          colors: [
-                            Color(0xFFBDA785),
-                            ColorList.tileBackgroundColor,
                           ],
                         ),
-                      ),
-                    ],
+                        SizedBox(height: 10.h),
+                        GradientButton(
+                          onPressed: () {
+                            Navigator.pushNamed(context, RouteUtils.signup);
+                          },
+                          text: "Sign up",
+                          gradient: LinearGradient(
+                            colors: [
+                              Color(0xFFBDA785),
+                              ColorList.tileBackgroundColor,
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

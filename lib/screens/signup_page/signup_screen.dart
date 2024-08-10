@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/services/firebase_auth_service.dart';
 import 'package:flutter_application_1/styles/color_list.dart';
 import 'package:flutter_application_1/utils/common/custome_button_widget.dart';
 import 'package:flutter_application_1/utils/common/glasseffect_widget.dart';
@@ -73,7 +74,14 @@ class _SignupScreenState extends State<SignupScreen> {
                             buttonColor: Colors.white,
                             textColor: ColorList.success,
                             onPressed: () {
-                              // login method
+                              // Register method
+                              if (emailController.text.isNotEmpty &&
+                                  passwordController.text.isNotEmpty) {
+                                FirebaseAuthService.instance.registration(
+                                  email: emailController.text,
+                                  password: passwordController.text,
+                                );
+                              }
                             },
                           ),
                         ),

@@ -6,6 +6,7 @@ class ModernTextFieldWidget extends StatelessWidget {
   final IconData? prefixIcon;
   final IconData? suffixIcon;
   final ValueChanged<String>? onChanged;
+  final bool autofocus;
 
   ModernTextFieldWidget({
     required this.controller,
@@ -13,13 +14,15 @@ class ModernTextFieldWidget extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.onChanged,
+    this.autofocus = false,
   });
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: controller,
       onChanged: onChanged,
+      autofocus: autofocus,
       decoration: InputDecoration(
         filled: true,
         hintText: hintText,
@@ -29,9 +32,7 @@ class ModernTextFieldWidget extends StatelessWidget {
         suffixIcon: suffixIcon != null
             ? IconButton(
                 icon: Icon(suffixIcon, color: Colors.blue),
-                onPressed: () {
-                  controller.clear();
-                },
+                onPressed: () {},
               )
             : null,
         border: OutlineInputBorder(

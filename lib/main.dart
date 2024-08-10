@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/services/firebase_auth_service.dart';
 import 'package:flutter_application_1/styles/color_list.dart';
 import 'package:flutter_application_1/utils/global/global_res.dart';
 import 'package:flutter_application_1/utils/global/route_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:bot_toast/bot_toast.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // ------ FIREBASE INITALIZATION -------------
+  await FirebaseAuthService.instance.initalization();
+
   runApp(const MyApp());
 }
 
@@ -64,6 +71,8 @@ class _MyAppState extends State<MyApp> {
           darkTheme: ThemeData.dark(useMaterial3: true),
           themeMode: Globals.instance.appTheme,
           initialRoute: RouteUtils.splash,
+          builder: BotToastInit(),
+          navigatorObservers: [BotToastNavigatorObserver()],
           routes: RouteUtils.routes,
         ),
       ),
