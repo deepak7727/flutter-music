@@ -12,7 +12,7 @@ developer experieince in 0.6 months
 - Screenutils
 - getx for state management 
 - spotify api
-
+- widegt plaaning
 
 1 : Add music player - on Progress
 2 : connect firebase - on Progress 
