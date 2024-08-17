@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/styles/color_list.dart';
+import 'package:flutter_application_1/styles/color_res.dart';
 import 'package:flutter_application_1/utils/common/custome_button_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -26,7 +26,7 @@ class _TestPageScreenState extends State<TestPageScreen> {
       builder: (context) {
         String? tempValue = _selectedValue;
         return AlertDialog(
-          backgroundColor: ColorList.scaffoldBackgroundColor,
+          backgroundColor: ColorRes.scaffoldBackgroundColor,
           title: Text("Selective Alert"),
           actionsAlignment: MainAxisAlignment.start,
           content: Column(
@@ -47,16 +47,16 @@ class _TestPageScreenState extends State<TestPageScreen> {
           actions: [
             CustomSquareButton(
               text: "accept",
-              textColor: ColorList.white,
-              buttonColor: ColorList.danger,
+              textColor: ColorRes.white,
+              buttonColor: ColorRes.danger,
               onPressed: () {
                 Navigator.pop(context);
               },
             ),
             CustomSquareButton(
               text: "Cancel",
-              textColor: ColorList.black,
-              buttonColor: ColorList.white,
+              textColor: ColorRes.black,
+              buttonColor: ColorRes.white,
               onPressed: () {
                 Navigator.pop(context);
               },

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/loading_page/loading_screen.dart';
 import 'package:flutter_application_1/screens/music_list_page/music_list_screen.dart';
 import 'package:flutter_application_1/screens/setting_page/setting_screen.dart';
-import 'package:flutter_application_1/styles/color_list.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:on_audio_query/on_audio_query.dart';
@@ -27,19 +27,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> _requestPermission() async {
     if (await Permission.storage.request().isGranted) {
-      // Permission is granted, you can read the files
-      print("::::::  perission Accept");
       permissionGranded = true;
       _getMusicFiles();
     } else if (await Permission.storage.isPermanentlyDenied) {
-      // Permission is permanently denied, you need to open the app settings
-      print('permission denied');
       openAppSettings();
     }
   }
 
   void _getMusicFiles() async {
-    // Implement your logic to get music files here
     List<SongModel> songsList = await _audioQuery.querySongs();
 
     setState(() {
@@ -55,9 +50,7 @@ class _HomeScreenState extends State<HomeScreen> {
           songs: songs,
         ),
         Center(
-          child: Container(
-            child: Text("Music Player"),
-          ),
+          child: LoadingScreen(),
         ),
         SettingScreen(),
       ][currentPage],
@@ -84,14 +77,6 @@ class _HomeScreenState extends State<HomeScreen> {
             label: "Setting",
           ),
         ],
-        backgroundColor: ColorList.tileBackgroundColor,
-        selectedFontSize: 18.sp,
-        selectedLabelStyle: TextStyle(
-          color: ColorList.white,
-        ),
-        selectedIconTheme: IconThemeData(
-          color: ColorList.white,
-        ),
         iconSize: 25.h,
       ),
     );

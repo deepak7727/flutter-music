@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/services/firebase_auth_service.dart';
-import 'package:flutter_application_1/styles/color_list.dart';
 import 'package:flutter_application_1/utils/global/global_res.dart';
 import 'package:flutter_application_1/utils/global/route_utils.dart';
+import 'package:flutter_application_1/utils/global/theme/music_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:bot_toast/bot_toast.dart';
@@ -33,6 +33,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     debugPrint('****** MyAppInitState *****');
+
     super.initState();
   }
 
@@ -51,24 +52,8 @@ class _MyAppState extends State<MyApp> {
         child: GetMaterialApp(
           title: 'Flutter Demo',
           debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-            appBarTheme: AppBarTheme(
-                backgroundColor: ColorList.primaryColor,
-                centerTitle: true,
-                titleTextStyle: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 25,
-                ),
-                scrolledUnderElevation: 0.0,
-                iconTheme: IconThemeData(
-                  color: ColorList.white,
-                  size: 30,
-                )),
-            scaffoldBackgroundColor: ColorList.scaffoldBackgroundColor,
-          ),
-          darkTheme: ThemeData.dark(useMaterial3: true),
+          theme: MusicTheme.instance.lightTheme(),
+          darkTheme: MusicTheme.instance.darkTheme(),
           themeMode: Globals.instance.appTheme,
           initialRoute: RouteUtils.splash,
           builder: BotToastInit(),

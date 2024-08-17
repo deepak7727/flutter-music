@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Globals {
   static final Globals instance = Globals._();
@@ -17,4 +18,9 @@ class Globals {
     }
   }
 
+  AndroidOptions getAndroidOptions() => const AndroidOptions(
+        encryptedSharedPreferences: true,
+      );
+
+  IOSOptions getIOSOptions() => IOSOptions();
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ColorList{
+class ColorRes{
   // Primary Blue Colors
   static const Color black = Color(0xFF000000); // Blue 500
   static const Color white = Color(0xFFFFFFFF); // Blue 500
@@ -21,4 +21,11 @@ class ColorList{
   static const Color blueGrey = Color(0xFF607D8B); // Blue Grey 500
   static const Color lightBlueGrey = Color(0xFFCFD8DC); // Blue Grey 100
   static const Color darkBlueGrey = Color(0xFF455A64); // Blue Grey 700
+
+  static final Color lightBlack = Color(0xFF303030);
+  static final Color lightwhite = Color(0x8BE2E2E2);  
+  static final Color secondryColor = Color(0xFFE2E2E2);
+  
+  static final Color primaryColorsecond = Color(0xFF071739);
+  static final Color secondryColorsecond = Color(0xFF4B6382);
 }

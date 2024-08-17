@@ -1,7 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/services/firebase_auth_service.dart';
-import 'package:flutter_application_1/styles/color_list.dart';
+import 'package:flutter_application_1/cubit/authtication/authtication_cubit.dart';
+import 'package:flutter_application_1/cubit/authtication/authtication_state.dart';
+import 'package:flutter_application_1/models/user_model.dart';
+import 'package:flutter_application_1/screens/loading_page/loading_screen.dart';
+import 'package:flutter_application_1/styles/color_res.dart';
 import 'package:flutter_application_1/utils/common/common_method.dart';
 import 'package:flutter_application_1/utils/common/custome_button_widget.dart';
 import 'package:flutter_application_1/utils/common/glasseffect_widget.dart';
@@ -10,6 +13,7 @@ import 'package:flutter_application_1/utils/common/modern_textfield_widget.dart'
 import 'package:flutter_application_1/utils/global/image_res.dart';
 import 'package:flutter_application_1/utils/global/route_utils.dart';
 import 'package:flutter_application_1/utils/common/gradient_button.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,113 +25,134 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController =
-      TextEditingController(text: (kDebugMode) ? "A" : " ");
+      TextEditingController(text: (kDebugMode) ? "deepak@me.com" : " ");
   TextEditingController passwordController =
-      TextEditingController(text: (kDebugMode) ? "A" : " ");
+      TextEditingController(text: (kDebugMode) ? "deepak@me" : " ");
   final loginKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Image.asset(
-            ImageRes.bg_loginImage,
-            fit: BoxFit.fitHeight,
-            height: double.maxFinite,
-          ),
-          Center(
-            child: GlassEffectWidget(
-              height: 400.h,
-              width: 350.w,
-              child: Center(
-                child: Container(
-                  margin: EdgeInsets.symmetric(
-                    horizontal: 20.w,
-                    vertical: 15.w,
-                  ),
-                  child: Form(
-                    key: loginKey,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        InvertedColorText(
-                            backgroundColor: ColorList.white,
-                            text: "Login Page"),
-                        SizedBox(height: 20.h),
-                        ModernTextFieldWidget(
-                          controller: emailController,
-                          hintText: "Enter Email",
-                          prefixIcon: Icons.email_outlined,
-                        ),
-                        SizedBox(height: 10.h),
-                        ModernTextFieldWidget(
-                          controller: passwordController,
-                          hintText: "Enter Password",
-                          prefixIcon: Icons.key_rounded,
-                        ),
-                        SizedBox(height: 15.h),
-                        Row(
-                          children: [
-                            Expanded(
-                              child: CustomSquareButton(
-                                text: "Login",
-                                textColor: ColorList.white,
-                                buttonColor:
-                                    const Color.fromRGBO(76, 175, 80, 1),
-                                onPressed: () async {
-                                  if (loginKey.currentState!.validate()) {
-                                    if (emailController.text.isNotEmpty &&
-                                        passwordController.text.isNotEmpty) {
-                                      String? res = await FirebaseAuthService
-                                          .instance
-                                          .login(
-                                        email: emailController.text,
-                                        password: passwordController.text,
-                                      );
+    return BlocConsumer<AuthticationCubit, AuthticationState>(
+        listener: (context, state) {
+      if (state is AuthticationSucess) {
+        showToast(title: state.message);
 
-                                      debugPrintLocal(
-                                          '****** res =  ${res} *****');
-                                      if (res == "Success ") {
-                                        Navigator.pushNamedAndRemoveUntil(
-                                            context,
-                                            RouteUtils.home,
-                                            (route) => false);
-                                      }
-                                    }
-                                  } else {
-                                    showToast(
-                                        title: "login issue",
-                                        message: "message message");
-                                  }
-                                },
-                              ),
-                            ),
-                          ],
+// save  to local database
+
+
+        Navigator.pushNamedAndRemoveUntil(
+          context,
+          RouteUtils.home,
+          (route) => false,
+        );
+      }
+      if (state is AuthticationError) {
+        showToast(title: state.message);
+      }
+    }, builder: (context, state) {
+      return Stack(
+        children: [
+          Scaffold(
+            body: Stack(
+              children: [
+                Image.asset(
+                  ImageRes.bg_loginImage,
+                  fit: BoxFit.fitHeight,
+                  height: double.maxFinite,
+                ),
+                Center(
+                  child: GlassEffectWidget(
+                    height: 400.h,
+                    width: 350.w,
+                    child: Center(
+                      child: Container(
+                        margin: EdgeInsets.symmetric(
+                          horizontal: 20.w,
+                          vertical: 15.w,
                         ),
-                        SizedBox(height: 10.h),
-                        GradientButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, RouteUtils.signup);
-                          },
-                          text: "Sign up",
-                          gradient: LinearGradient(
-                            colors: [
-                              Color(0xFFBDA785),
-                              ColorList.tileBackgroundColor,
+                        child: Form(
+                          key: loginKey,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              InvertedColorText(
+                                  backgroundColor: ColorRes.white,
+                                  text: "Login Page"),
+                              SizedBox(height: 20.h),
+                              ModernTextFieldWidget(
+                                controller: emailController,
+                                hintText: "Enter Email",
+                                prefixIcon: Icons.email_outlined,
+                              ),
+                              SizedBox(height: 10.h),
+                              ModernTextFieldWidget(
+                                controller: passwordController,
+                                hintText: "Enter Password",
+                                prefixIcon: Icons.key_rounded,
+                              ),
+                              SizedBox(height: 15.h),
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: CustomSquareButton(
+                                      text: "Login",
+                                      textColor: ColorRes.white,
+                                      buttonColor:
+                                          const Color.fromRGBO(76, 175, 80, 1),
+                                      onPressed: () async {
+                                        if (loginKey.currentState!.validate()) {
+                                          if (emailController.text.isNotEmpty &&
+                                              passwordController
+                                                  .text.isNotEmpty) {
+                                            BlocProvider.of<AuthticationCubit>(
+                                                    context)
+                                                .Login(
+                                              user: UserModel(
+                                                userEmail: emailController.text,
+                                                password:
+                                                    passwordController.text,
+                                              ),
+                                            );
+                                          }
+                                        } else {
+                                          showToast(
+                                              title: "Please Enter Values",
+                                              message:
+                                                  "Enter email or password");
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(height: 10.h),
+                              GradientButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, RouteUtils.signup);
+                                },
+                                text: "Create an account",
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFFBDA785),
+                                    ColorRes.tileBackgroundColor,
+                                  ],
+                                ),
+                              ),
                             ],
                           ),
                         ),
-                      ],
+                      ),
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
           ),
+          if (state is AuthticationLoading) const LoadingScreen()
         ],
-      ),
-    );
+      );
+    });
   }
 }

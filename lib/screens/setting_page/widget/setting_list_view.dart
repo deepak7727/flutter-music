@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/styles/color_list.dart';
+import 'package:flutter_application_1/styles/color_res.dart';
 import 'package:flutter_application_1/styles/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -17,6 +17,8 @@ class SettingListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final brightness = Theme.of(context).brightness;
+
     return InkWell(
       onTap: settingAction,
       child: Container(
@@ -27,7 +29,9 @@ class SettingListView extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.r),
-          color: ColorList.lightBlueGrey,
+          color: (brightness == Brightness.dark)
+              ? ColorRes.accentBlue
+              : ColorRes.lightwhite,
         ),
         child: Row(
           children: [
