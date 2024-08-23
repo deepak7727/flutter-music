@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_application_1/cubit/authtication/authtication_cubit.dart';
 import 'package:flutter_application_1/screens/home_page/home_screen.dart';
 import 'package:flutter_application_1/screens/login_page/login_screen.dart';
@@ -8,7 +7,7 @@ import 'package:flutter_application_1/screens/signup_page/signup_screen.dart';
 import 'package:flutter_application_1/screens/splash_page/splash_screen.dart';
 import 'package:flutter_application_1/screens/test_page/test_page_screen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:on_audio_query/on_audio_query.dart';
+import 'package:get/get.dart';
 
 class RouteUtils {
   static String login = '/login';
@@ -20,23 +19,42 @@ class RouteUtils {
   static String profile = '/profile';
   static String test = '/test';
 
-  static Map<String, Widget Function(BuildContext)> get routes {
-    return {
-      RouteUtils.splash: (context) => SplashScreen(),
-      RouteUtils.login: (context) => BlocProvider(
-            create: (context) => AuthticationCubit(),
-            child: LoginScreen(),
+  static List<GetPage<dynamic>>? get routes {
+    return [
+          GetPage(
+            name: RouteUtils.splash,
+            page: () => SplashScreen(),
           ),
-      RouteUtils.signup: (context) => BlocProvider(
-            create: (context) => AuthticationCubit(),
-            child: SignupScreen(),
+          GetPage(
+            name: RouteUtils.login,
+            page: () => BlocProvider(
+              create: (context) => AuthticationCubit(),
+              child: LoginScreen(),
+            ),
           ),
-      RouteUtils.home: (context) => HomeScreen(),
-      RouteUtils.profile: (context) => ProfileScreen(),
-      RouteUtils.test: (context) => TestPageScreen(),
-      RouteUtils.player: (context) => PlayerScreen(
-            song: ModalRoute.of(context)!.settings.arguments as SongModel,
+          GetPage(
+            name: RouteUtils.signup,
+            page: () => BlocProvider(
+              create: (context) => AuthticationCubit(),
+              child: SignupScreen(),
+            ),
           ),
-    };
+          GetPage(
+            name: RouteUtils.home,
+            page: () => HomeScreen(),
+          ),
+          GetPage(
+            name: RouteUtils.profile,
+            page: () => ProfileScreen(),
+          ),
+          GetPage(
+            name: RouteUtils.test,
+            page: () => TestPageScreen(),
+          ),
+          GetPage(
+            name: RouteUtils.player,
+            page: () => PlayerScreen(),
+          ),
+        ];
   }
 }

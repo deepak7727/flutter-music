@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/styles/color_res.dart';
-import 'package:flutter_application_1/styles/styles.dart';
 
 class MusicTheme {
   static final MusicTheme instance = MusicTheme._();

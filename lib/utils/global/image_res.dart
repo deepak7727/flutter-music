@@ -18,4 +18,5 @@ class ImageRes{
   static final String lottieEmptyList = "${lottiePath}lottie1.json";
   static final String lottieShare = "${lottiePath}lottie2.json";
   static final String lottieLoading = "${lottiePath}loading_lottie.json";
+  static final String lottieSplash = "${lottiePath}splash_lottie.json";
 }

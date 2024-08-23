@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/utils/common/common_method.dart';
 import 'package:flutter_application_1/utils/global/route_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 // ignore: must_be_immutable
@@ -17,11 +19,7 @@ class _MusicListTileState extends State<MusicListTile> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(
-          context,
-          RouteUtils.player,
-          arguments: widget.song,
-        );
+        Get.toNamed(RouteUtils.player, arguments: widget.song);
       },
       child: Container(
         padding: EdgeInsets.all(10.w),
@@ -34,9 +32,9 @@ class _MusicListTileState extends State<MusicListTile> {
                 widget.song.title,
               ),
             ),
-            Text(
-              Duration(milliseconds: widget.song.duration!).toString(),
-            ),
+            Text(intToDuration(
+                    Duration(milliseconds: widget.song.duration!).inSeconds)
+                .toString()),
           ],
         ),
       ),

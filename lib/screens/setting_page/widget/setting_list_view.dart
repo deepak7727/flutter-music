@@ -30,7 +30,7 @@ class SettingListView extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.r),
           color: (brightness == Brightness.dark)
-              ? ColorRes.accentBlue
+              ? ColorRes.lightBlack.withOpacity(0.5)
               : ColorRes.lightwhite,
         ),
         child: Row(

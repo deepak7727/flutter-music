@@ -5,14 +5,13 @@ import 'package:flutter_application_1/styles/styles.dart';
 import 'package:flutter_application_1/utils/common/common_method.dart';
 import 'package:flutter_application_1/utils/global/image_res.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class PlayerScreen extends StatefulWidget {
-  final SongModel song;
   PlayerScreen({
     super.key,
-    required this.song,
   });
 
   @override
@@ -22,6 +21,7 @@ class PlayerScreen extends StatefulWidget {
 class _PlayerScreenState extends State<PlayerScreen>
     with TickerProviderStateMixin {
   final player = AudioPlayer();
+  final SongModel songmodel = Get.arguments as SongModel;
 
   ValueNotifier<Duration?> duration = ValueNotifier(Duration.zero);
   Duration? totalDuration = Duration.zero;
@@ -39,8 +39,8 @@ class _PlayerScreenState extends State<PlayerScreen>
   }
 
   void setMusicToPlayer() async {
-    duration.value = await player.setUrl(widget.song.data);
-    totalDuration = Duration(milliseconds: widget.song.duration!);
+    duration.value = await player.setUrl(songmodel.data);
+    totalDuration = Duration(milliseconds: songmodel.duration!);
     player.play();
   }
 
@@ -62,7 +62,7 @@ class _PlayerScreenState extends State<PlayerScreen>
                 height: 30.h,
               ),
               Text(
-                widget.song.displayName,
+                songmodel.displayName,
                 style: Styles.textstyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,

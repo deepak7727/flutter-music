@@ -15,6 +15,7 @@ import 'package:flutter_application_1/utils/global/route_utils.dart';
 import 'package:flutter_application_1/utils/common/gradient_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -39,12 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
 // save  to local database
 
-
-        Navigator.pushNamedAndRemoveUntil(
-          context,
-          RouteUtils.home,
-          (route) => false,
-        );
+        Get.offAllNamed(RouteUtils.home);
       }
       if (state is AuthticationError) {
         showToast(title: state.message);
@@ -129,10 +125,21 @@ class _LoginScreenState extends State<LoginScreen> {
                               SizedBox(height: 10.h),
                               GradientButton(
                                 onPressed: () {
-                                  Navigator.pushNamed(
-                                      context, RouteUtils.signup);
+                                  Get.toNamed(RouteUtils.signup);
                                 },
                                 text: "Create an account",
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color(0xFFBDA785),
+                                    ColorRes.tileBackgroundColor,
+                                  ],
+                                ),
+                              ),
+                              GradientButton(
+                                onPressed: () {
+                                  Get.toNamed(RouteUtils.home);
+                                },
+                                text: "Go to Home",
                                 gradient: LinearGradient(
                                   colors: [
                                     Color(0xFFBDA785),

@@ -37,6 +37,8 @@ String? exceptionHandling(dynamic error, StackTrace stack) {
     return "Platform Specific Exceptions";
   } else if (error is TimeoutException) {
     return "TimeOut Exception";
+  } else if (error is SocketException) {
+    return "Socket Exception";
   } else {
     return error.toString();
   }

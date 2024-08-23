@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/services/firebase_auth_service.dart';
-import 'package:flutter_application_1/utils/global/global_res.dart';
 import 'package:flutter_application_1/utils/global/route_utils.dart';
 import 'package:flutter_application_1/utils/global/theme/music_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,47 +18,30 @@ void main() async {
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  static void restartApp(BuildContext context) {
-    context.findAncestorStateOfType<_MyAppState>()?.restartApp();
-  }
-
   @override
   State<MyApp> createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
-  Key key = UniqueKey();
-
   @override
   void initState() {
     debugPrint('****** MyAppInitState *****');
-
     super.initState();
-  }
-
-  void restartApp() {
-    setState(() {
-      key = UniqueKey();
-    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return KeyedSubtree(
-      key: key,
-      child: ScreenUtilInit(
-        designSize: getAppSize(context),
-        child: GetMaterialApp(
-          title: 'Flutter Demo',
-          debugShowCheckedModeBanner: false,
-          theme: MusicTheme.instance.lightTheme(),
-          darkTheme: MusicTheme.instance.darkTheme(),
-          themeMode: Globals.instance.appTheme,
-          initialRoute: RouteUtils.splash,
-          builder: BotToastInit(),
-          navigatorObservers: [BotToastNavigatorObserver()],
-          routes: RouteUtils.routes,
-        ),
+    return ScreenUtilInit(
+      designSize: getAppSize(context),
+      child: GetMaterialApp(
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: MusicTheme.instance.lightTheme(),
+        darkTheme: MusicTheme.instance.darkTheme(),
+        initialRoute: RouteUtils.splash,
+        builder: BotToastInit(),
+        navigatorObservers: [BotToastNavigatorObserver()],
+        getPages: RouteUtils.routes,
       ),
     );
   }

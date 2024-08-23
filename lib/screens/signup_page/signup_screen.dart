@@ -14,6 +14,7 @@ import 'package:flutter_application_1/utils/global/route_utils.dart';
 import 'package:flutter_application_1/utils/common/gradient_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -98,11 +99,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                           showToast(
                                             title: res!,
                                           );
-                                          Navigator.pushNamedAndRemoveUntil(
-                                            context,
-                                            RouteUtils.login,
-                                            (route) => false,
-                                          );
+                                          Get.offAllNamed(RouteUtils.login);
                                         } else {
                                           showToast(title: res!, isError: true);
                                         }
@@ -122,11 +119,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             SizedBox(height: 10.h),
                             GradientButton(
                               onPressed: () {
-                                Navigator.pushNamedAndRemoveUntil(
-                                  context,
-                                  RouteUtils.login,
-                                  (route) => false,
-                                );
+                                Get.offAllNamed(RouteUtils.login);
                               },
                               text: "Go Login",
                               gradient: LinearGradient(colors: [
@@ -142,7 +135,6 @@ class _SignupScreenState extends State<SignupScreen> {
                 ],
               ),
             ),
-
             if (state is AuthticationLoading) const LoadingScreen(),
           ],
         );

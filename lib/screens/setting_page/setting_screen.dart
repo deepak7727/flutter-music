@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/main.dart';
 import 'package:flutter_application_1/screens/setting_page/widget/setting_list_view.dart';
-import 'package:flutter_application_1/utils/global/global_res.dart';
 import 'package:flutter_application_1/utils/global/route_utils.dart';
+import 'package:flutter_application_1/utils/global/theme/music_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});
@@ -21,13 +21,13 @@ class _SettingScreenState extends State<SettingScreen> {
         actions: [
           InkWell(
             onTap: () {
-              Globals.instance.changeTheme();
-              MyApp.restartApp(context);
-              setState(() {});
+              Get.changeTheme(Get.isDarkMode
+                  ? MusicTheme.instance.lightTheme()
+                  : MusicTheme.instance.darkTheme());
             },
             child: Padding(
               padding: EdgeInsets.only(right: 10.w),
-              child: Globals.instance.darkMode
+              child: Get.isDarkMode
                   ? Icon(Icons.light_mode_outlined)
                   : Icon(Icons.dark_mode),
             ),
@@ -39,36 +39,28 @@ class _SettingScreenState extends State<SettingScreen> {
           SettingListView(
             settingName: "Logout",
             settingAction: () {
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                RouteUtils.login,
-                (route) => false,
-              );
+              Get.offAllNamed(RouteUtils.login);
             },
           ),
           SettingListView(
             settingName: "Register",
             settingIcon: Icons.real_estate_agent_rounded,
             settingAction: () {
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                RouteUtils.signup,
-                (route) => false,
-              );
+              Get.toNamed(RouteUtils.signup);
             },
           ),
           SettingListView(
             settingName: "Profile",
             settingIcon: Icons.person_2_outlined,
             settingAction: () {
-              Navigator.pushNamed(context, RouteUtils.profile);
+              Get.toNamed(RouteUtils.profile);
             },
           ),
           SettingListView(
             settingName: "Tesing",
             settingIcon: Icons.terrain,
             settingAction: () {
-              Navigator.pushNamed(context, RouteUtils.test);
+              Get.toNamed(RouteUtils.test);
             },
           ),
         ],

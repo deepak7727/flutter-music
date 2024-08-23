@@ -6,6 +6,8 @@ import 'package:flutter_application_1/utils/global/image_res.dart';
 import 'package:flutter_application_1/utils/global/prefes_res.dart';
 import 'package:flutter_application_1/utils/global/route_utils.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -27,9 +29,9 @@ class _SplashScreenState extends State<SplashScreen> {
         );
 
         if (currentUser != null) {
-          Navigator.pushReplacementNamed(context, RouteUtils.home);
+          Get.offAllNamed(RouteUtils.home);
         } else {
-          Navigator.pushReplacementNamed(context, RouteUtils.login);
+          Get.offAllNamed(RouteUtils.login);
         }
       });
     });
@@ -40,8 +42,8 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Image.asset(
-          ImageRes.logoImage,
+        child: Lottie.asset(
+          ImageRes.lottieSplash,
           height: 100,
         ),
       ),
