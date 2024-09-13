@@ -38,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
       if (state is AuthticationSucess) {
         showToast(title: state.message);
 
-// save  to local database
+      // save  to local database
 
         Get.offAllNamed(RouteUtils.home);
       }
@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           key: loginKey,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.max,
+                            mainAxisSize: MainAxisSize.min,
                             children: [
                               InvertedColorText(
                                   backgroundColor: ColorRes.white,
@@ -128,18 +128,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                   Get.toNamed(RouteUtils.signup);
                                 },
                                 text: "Create an account",
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color(0xFFBDA785),
-                                    ColorRes.tileBackgroundColor,
-                                  ],
-                                ),
-                              ),
-                              GradientButton(
-                                onPressed: () {
-                                  Get.toNamed(RouteUtils.home);
-                                },
-                                text: "Go to Home",
                                 gradient: LinearGradient(
                                   colors: [
                                     Color(0xFFBDA785),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/setting_controller.dart';
 import 'package:flutter_application_1/services/firebase_auth_service.dart';
 import 'package:flutter_application_1/utils/global/route_utils.dart';
 import 'package:flutter_application_1/utils/global/theme/music_theme.dart';
@@ -23,6 +24,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final SettingController settingController = Get.put(SettingController());
   @override
   void initState() {
     debugPrint('****** MyAppInitState *****');
@@ -33,15 +35,18 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: getAppSize(context),
-      child: GetMaterialApp(
-        title: 'Flutter Demo',
-        debugShowCheckedModeBanner: false,
-        theme: MusicTheme.instance.lightTheme(),
-        darkTheme: MusicTheme.instance.darkTheme(),
-        initialRoute: RouteUtils.splash,
-        builder: BotToastInit(),
-        navigatorObservers: [BotToastNavigatorObserver()],
-        getPages: RouteUtils.routes,
+      child: Obx(
+        () => GetMaterialApp(
+          title: 'Music App',
+          debugShowCheckedModeBanner: false,
+          themeMode: settingController.themeData,
+          theme: MusicTheme.instance.lightTheme(),
+          darkTheme: MusicTheme.instance.darkTheme(),
+          initialRoute: RouteUtils.splash,
+          builder: BotToastInit(),
+          navigatorObservers: [BotToastNavigatorObserver()],
+          getPages: RouteUtils.routes,
+        ),
       ),
     );
   }

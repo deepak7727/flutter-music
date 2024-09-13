@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/setting_controller.dart';
 import 'package:flutter_application_1/screens/setting_page/widget/setting_list_view.dart';
 import 'package:flutter_application_1/utils/global/route_utils.dart';
-import 'package:flutter_application_1/utils/global/theme/music_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +13,8 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+  final SettingController settingController = Get.put(SettingController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,9 +23,8 @@ class _SettingScreenState extends State<SettingScreen> {
         actions: [
           InkWell(
             onTap: () {
-              Get.changeTheme(Get.isDarkMode
-                  ? MusicTheme.instance.lightTheme()
-                  : MusicTheme.instance.darkTheme());
+              settingController.toggleTheme();
+              print('aaa ********* ${settingController.isDarkMode.value}');
             },
             child: Padding(
               padding: EdgeInsets.only(right: 10.w),
@@ -58,6 +59,13 @@ class _SettingScreenState extends State<SettingScreen> {
           ),
           SettingListView(
             settingName: "Tesing",
+            settingIcon: Icons.terrain,
+            settingAction: () {
+              Get.toNamed(RouteUtils.test);
+            },
+          ),
+          SettingListView(
+            settingName: "Color Theme",
             settingIcon: Icons.terrain,
             settingAction: () {
               Get.toNamed(RouteUtils.test);

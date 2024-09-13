@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/music_list_page/music_list_tile.dart';
-import 'package:flutter_application_1/screens/music_list_page/no_music_widget.dart';
+import 'package:flutter_application_1/screens/music_list_page/widget/music_list_tile.dart';
+import 'package:flutter_application_1/screens/music_list_page/widget/no_music_widget.dart';
 import 'package:flutter_application_1/styles/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:on_audio_query/on_audio_query.dart';
