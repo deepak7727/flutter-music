@@ -1,22 +1,4 @@
 
-# flutter_application_1
-
-A new Flutter project.
-
-## Getting Started
-
-it's application is for basically to play song from spotify api 
-and easy to implement apis in flutter so its developed in fluuter 
-
-developer experience - 0.6 months 
-
-project started on 7-May 2024
-Project End info - 6 months (as per time have).
-
-- Screenutils
-- getx for state management 
-- spotify api
-=======
 # Music Player Application
 
 This is a Flutter-based music player application that integrates with the Spotify API to stream and play songs. The project is structured with modern state management using GetX and has plans for future development including video playback and Firebase integration.
