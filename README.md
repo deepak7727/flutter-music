@@ -31,7 +31,7 @@ The application requires permission to access internal storage to save and retri
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/music-player-app.git
+    git clone https://github.com/deepak7727/flutter-music.git
     cd music-player-app
     ```
 
