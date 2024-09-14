@@ -6,14 +6,9 @@ class HomeController extends GetxController {
   final OnAudioQuery _audioQuery = OnAudioQuery();
   RxList<SongModel> foundSongs = RxList<SongModel>([]);
 
-  @override
   void onInit() {
     fetchMusic();
-  }
-
-  @override
-  void onReady() {
-    fetchMusic();
+    super.onInit();
   }
 
   Future<void> fetchMusic() async {
@@ -42,5 +37,6 @@ class HomeController extends GetxController {
     print(songs.length);
     print('aaa **** foundSongs.value ***** ${foundSongs.length}');
     print('aaa **** searchResultSong ***** ${searchResultSong.length}');
+    foundSongs.refresh();
   }
 }

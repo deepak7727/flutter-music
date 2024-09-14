@@ -6,7 +6,6 @@ import 'package:flutter_application_1/screens/setting_page/setting_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:on_audio_query/on_audio_query.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,8 +16,6 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final HomeController homeController = Get.put(HomeController());
-
-  final RxList<SongModel> songs = RxList();
   bool permissionGranded = false;
   RxInt currentPage = 0.obs;
 
@@ -35,7 +32,6 @@ class _HomeScreenState extends State<HomeScreen> {
     } else if (await Permission.storage.isPermanentlyDenied) {
       openAppSettings();
     }
-    songs.value = homeController.songs;
   }
 
   @override
@@ -43,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Obx(
       () => Scaffold(
         body: [
-          MusicListScreen(songs: songs),
+          MusicListScreen(),
           Center(child: LoadingScreen()),
           SettingScreen(),
         ][currentPage.value],
