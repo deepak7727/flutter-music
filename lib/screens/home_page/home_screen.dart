@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/controller/home_controller.dart';
 import 'package:flutter_application_1/screens/loading_page/loading_screen.dart';
 import 'package:flutter_application_1/screens/music_list_page/music_list_screen.dart';
 import 'package:flutter_application_1/screens/setting_page/setting_screen.dart';
@@ -15,7 +14,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final HomeController homeController = Get.put(HomeController());
   bool permissionGranded = false;
   RxInt currentPage = 0.obs;
 
@@ -28,7 +26,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _requestPermission() async {
     if (await Permission.storage.request().isGranted) {
       permissionGranded = true;
-      await homeController.fetchMusic();
     } else if (await Permission.storage.isPermanentlyDenied) {
       openAppSettings();
     }

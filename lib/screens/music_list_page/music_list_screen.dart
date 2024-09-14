@@ -14,7 +14,14 @@ class MusicListScreen extends StatefulWidget {
 }
 
 class _MusicListScreenState extends State<MusicListScreen> {
-  final HomeController homeController = Get.put(HomeController());
+  final MusicListController musicController = Get.put(MusicListController());
+
+
+  @override
+  void initState() {
+    musicController.fetchMusic();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,18 +37,20 @@ class _MusicListScreenState extends State<MusicListScreen> {
           ),
         ],
       ),
-      body: (homeController.songs.length > 0)
-          ? ListView.separated(
-              separatorBuilder: (context, index) => Divider(),
-              itemCount: homeController.songs.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return MusicListTile(
-                  song: homeController.songs[index],
-                );
-              },
-            )
-          : NoMusicWidget(),
+      body: Obx(
+        () => (musicController.songs.length > 0)
+            ? ListView.separated(
+                separatorBuilder: (context, index) => Divider(),
+                itemCount: musicController.songs.length,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return MusicListTile(
+                    song: musicController.songs[index],
+                  );
+                },
+              )
+            : NoMusicWidget(),
+      ),
     );
   }
 }

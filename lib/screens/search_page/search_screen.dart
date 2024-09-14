@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/home_controller.dart';
 import 'package:flutter_application_1/screens/music_list_page/widget/music_list_tile.dart';
+import 'package:flutter_application_1/screens/music_list_page/widget/no_music_widget.dart';
 import 'package:flutter_application_1/screens/search_page/widget/search_bar_textfield.dart';
 import 'package:flutter_application_1/utils/common/action_icon_widget.dart';
 import 'package:get/get.dart';
-import 'package:on_audio_query/on_audio_query.dart';
-import 'package:shimmer/shimmer.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -16,9 +15,7 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   final TextEditingController searchController = TextEditingController();
-  final HomeController homeController = Get.put(HomeController());
-
-  RxList<SongModel> songs = RxList([]);
+  final MusicListController homeController = Get.put(MusicListController());
 
   @override
   void initState() {
@@ -27,52 +24,39 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: SearchBarTextfield(
-          controller: searchController,
-          hint: "Search",
-          onChanged: (value) => homeController.searchSong(query: value),
+    return Obx(
+      () => Scaffold(
+        appBar: AppBar(
+          title: SearchBarTextfield(
+            controller: searchController,
+            hint: "Search",
+            onChanged: (value) => homeController.searchSong(query: value),
+          ),
+          actions: [
+            (searchController.text == "")
+                ? ActionIconWidget(
+                    icon: Icons.search,
+                    onTap: () {},
+                  )
+                : ActionIconWidget(
+                    icon: Icons.cancel,
+                    onTap: () {},
+                  ),
+          ],
         ),
-        actions: [
-          (searchController.text == "")
-              ? ActionIconWidget(
-                  icon: Icons.search,
-                  onTap: () {},
-                )
-              : ActionIconWidget(
-                  icon: Icons.cancel,
-                  onTap: () {},
-                ),
-        ],
-      ),
-      body: (homeController.foundSongs.length > 0)
-          ? ListView.separated(
-              separatorBuilder: (context, index) => Divider(),
-              itemCount: homeController.foundSongs.length,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return MusicListTile(
-                  song: homeController.foundSongs[index],
-                );
-              },
-            )
-          : Shimmer.fromColors(
-              baseColor: Colors.grey[300]!,
-              highlightColor: Colors.grey[100]!,
-              child: ListView.builder(
-                itemCount: 5,
+        body: (homeController.foundSongs.length > 0)
+            ? ListView.separated(
+                separatorBuilder: (context, index) => Divider(),
+                itemCount: homeController.foundSongs.length,
+                shrinkWrap: true,
                 itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Container(
-                      height: 20,
-                      width: 200,
-                      color: Colors.white,
-                    ),
+                  return MusicListTile(
+                    song: homeController.foundSongs[index],
                   );
                 },
-              ),
-            ),
+              )
+            : NoMusicWidget(),
+      ),
     );
   }
 }

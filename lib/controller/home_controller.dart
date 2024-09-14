@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
-class HomeController extends GetxController {
+class MusicListController extends GetxController {
   final RxList<SongModel> songs = RxList();
   final OnAudioQuery _audioQuery = OnAudioQuery();
   RxList<SongModel> foundSongs = RxList<SongModel>([]);
@@ -25,7 +25,7 @@ class HomeController extends GetxController {
   void searchSong({required String query}) {
     List<SongModel> searchResultSong = [];
     if (query.isEmpty) {
-      foundSongs = songs;
+      searchResultSong = songs;
     } else {
       searchResultSong = songs
           .where(
@@ -34,9 +34,11 @@ class HomeController extends GetxController {
           .toList();
     }
     foundSongs.value = searchResultSong;
-    print(songs.length);
-    print('aaa **** foundSongs.value ***** ${foundSongs.length}');
-    print('aaa **** searchResultSong ***** ${searchResultSong.length}');
+    print("****************");
+    print('aaa **** query ***** ${ query }');
+    print('aaa **** foundSongs.length ***** ${ foundSongs.length }');
+    print('aaa **** songs.length ***** ${ songs.length }');
+    print("****************");
     foundSongs.refresh();
   }
 }
