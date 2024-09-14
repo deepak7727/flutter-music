@@ -91,8 +91,8 @@ class _SignupScreenState extends State<SignupScreen> {
                                         String? res = await FirebaseAuthService
                                             .instance
                                             .registration(
-                                          email: emailController.text,
-                                          password: passwordController.text,
+                                          email: emailController.text.trim(),
+                                          password: passwordController.text.trim(),
                                         );
                                         debugPrint('****** res *****');
                                         if (res == "Success") {

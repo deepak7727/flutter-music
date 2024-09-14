@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/home_controller.dart';
 import 'package:flutter_application_1/screens/loading_page/loading_screen.dart';
 import 'package:flutter_application_1/screens/music_list_page/music_list_screen.dart';
 import 'package:flutter_application_1/screens/setting_page/setting_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
@@ -14,70 +16,60 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final OnAudioQuery _audioQuery = OnAudioQuery();
-  List<SongModel> songs = [];
+  final HomeController homeController = Get.put(HomeController());
+
+  final RxList<SongModel> songs = RxList();
   bool permissionGranded = false;
-  int currentPage = 0;
+  RxInt currentPage = 0.obs;
 
   @override
   void initState() {
-    super.initState();
     _requestPermission();
+    super.initState();
   }
 
   Future<void> _requestPermission() async {
     if (await Permission.storage.request().isGranted) {
       permissionGranded = true;
-      _getMusicFiles();
+      await homeController.fetchMusic();
     } else if (await Permission.storage.isPermanentlyDenied) {
       openAppSettings();
     }
-  }
-
-  void _getMusicFiles() async {
-    List<SongModel> songsList = await _audioQuery.querySongs();
-
-    setState(() {
-      songs = songsList;
-    });
+    songs.value = homeController.songs;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: [
-        MusicListScreen(
-          songs: songs,
-        ),
-        Center(
-          child: LoadingScreen(),
-        ),
-        SettingScreen(),
-      ][currentPage],
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentPage,
-        onTap: (index) {
-          setState(() {
-            currentPage = index;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(
-              Icons.music_note,
+    return Obx(
+      () => Scaffold(
+        body: [
+          MusicListScreen(songs: songs),
+          Center(child: LoadingScreen()),
+          SettingScreen(),
+        ][currentPage.value],
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: currentPage.value,
+          onTap: (index) {
+            currentPage.value = index;
+          },
+          items: [
+            BottomNavigationBarItem(
+              icon: Icon(
+                Icons.music_note,
+              ),
+              label: "Music List",
             ),
-            label: "Music List",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.music_video),
-            label: "Music ALbum",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: "Setting",
-          ),
-        ],
-        iconSize: 25.h,
+            BottomNavigationBarItem(
+              icon: Icon(Icons.music_video),
+              label: "Music ALbum",
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings),
+              label: "Setting",
+            ),
+          ],
+          iconSize: 25.h,
+        ),
       ),
     );
   }

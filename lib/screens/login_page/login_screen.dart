@@ -26,9 +26,9 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController =
-      TextEditingController(text: (kDebugMode) ? "deepak@me.com" : " ");
+      TextEditingController(text: (kDebugMode) ? "deepak@me.com" : "");
   TextEditingController passwordController =
-      TextEditingController(text: (kDebugMode) ? "deepak@me" : " ");
+      TextEditingController(text: (kDebugMode) ? "deepak@me" : "");
   final loginKey = GlobalKey<FormState>();
 
   @override
@@ -37,13 +37,11 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
       if (state is AuthticationSucess) {
         showToast(title: state.message);
-
-      // save  to local database
-
+        // save  to local database
         Get.offAllNamed(RouteUtils.home);
       }
       if (state is AuthticationError) {
-        showToast(title: state.message);
+        showToast(title: state.message, isError: true);
       }
     }, builder: (context, state) {
       return Stack(
@@ -101,15 +99,28 @@ class _LoginScreenState extends State<LoginScreen> {
                                           if (emailController.text.isNotEmpty &&
                                               passwordController
                                                   .text.isNotEmpty) {
-                                            BlocProvider.of<AuthticationCubit>(
-                                                    context)
-                                                .Login(
-                                              user: UserModel(
-                                                userEmail: emailController.text,
-                                                password:
-                                                    passwordController.text,
-                                              ),
-                                            );
+                                            if (await checkNetwork()) {
+                                              print(
+                                                  'aaa ********* Check Network ${await checkNetwork()}');
+                                              BlocProvider.of<
+                                                          AuthticationCubit>(
+                                                      context)
+                                                  .Login(
+                                                user: UserModel(
+                                                  userEmail: emailController
+                                                      .text
+                                                      .trim(),
+                                                  password: passwordController
+                                                      .text
+                                                      .trim(),
+                                                ),
+                                              );
+                                            } else {
+                                              showToast(
+                                                title: "No Internt Connection",
+                                                isError: true,
+                                              );
+                                            }
                                           }
                                         } else {
                                           showToast(
@@ -133,6 +144,14 @@ class _LoginScreenState extends State<LoginScreen> {
                                     Color(0xFFBDA785),
                                     ColorRes.tileBackgroundColor,
                                   ],
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  Get.offAllNamed(RouteUtils.home);
+                                },
+                                child: Icon(
+                                  Icons.home,
                                 ),
                               ),
                             ],

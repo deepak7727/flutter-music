@@ -46,6 +46,7 @@ class _MyAppState extends State<MyApp> {
           builder: BotToastInit(),
           navigatorObservers: [BotToastNavigatorObserver()],
           getPages: RouteUtils.routes,
+          unknownRoute: RouteUtils.unknownRoute,
         ),
       ),
     );
