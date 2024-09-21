@@ -31,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
         if (currentUser != null) {
           Get.offAllNamed(RouteUtils.home);
         } else {
-          Get.offAllNamed(RouteUtils.login);
+          Get.offAllNamed(RouteUtils.welomeScreen);
         }
       });
     });

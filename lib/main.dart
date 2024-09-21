@@ -13,11 +13,12 @@ void main() async {
   // ------ FIREBASE INITALIZATION -------------
   await FirebaseAuthService.instance.initalization();
 
-  runApp(const MyApp());
+  runApp(const MyApp(isSpotifyUIType: true));
 }
 
 class MyApp extends StatefulWidget {
-  const MyApp({super.key});
+  final bool isSpotifyUIType;
+  const MyApp({super.key, required this.isSpotifyUIType});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -28,6 +29,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     debugPrint('****** MyAppInitState *****');
+    
     super.initState();
   }
 
@@ -42,10 +44,14 @@ class _MyAppState extends State<MyApp> {
           themeMode: settingController.themeData,
           theme: MusicTheme.instance.lightTheme(),
           darkTheme: MusicTheme.instance.darkTheme(),
-          initialRoute: RouteUtils.splash,
+          initialRoute: widget.isSpotifyUIType
+              ? RouteUtils.welomeScreen
+              : RouteUtils.splash,
           builder: BotToastInit(),
           navigatorObservers: [BotToastNavigatorObserver()],
-          getPages: RouteUtils.routes,
+          getPages: widget.isSpotifyUIType
+              ? RouteUtils.spotifyRoutes
+              : RouteUtils.routes,
           unknownRoute: RouteUtils.unknownRoute,
         ),
       ),

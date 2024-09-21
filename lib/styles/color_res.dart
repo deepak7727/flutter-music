@@ -28,4 +28,12 @@ class ColorRes{
   
   static final Color primaryColorsecond = Color(0xFF071739);
   static final Color secondryColorsecond = Color(0xFF4B6382);
+
+
+  // spotify_ui_color_code
+  static final Color spotifyPrimaryColor =   Color(0xFF1ED760);
+  static final Color spotifyGreyColor=   Color(0xFF777777);
+  static final Color spotifyLightBlackColor=   Color(0xFF282828);
+  static final Color spotifyBlackColor=   Color(0xFF121212);
+
 }
