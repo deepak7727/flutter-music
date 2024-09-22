@@ -1,19 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/styles/color_res.dart';
 import 'package:flutter_application_1/styles/styles.dart';
+import 'package:flutter_application_1/utils/global/enum_res.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SpCreateAccountTextfieldWidget extends StatefulWidget {
   final String textfieldTitle;
+  final String? Function(String?)? validator;
   final String? textfieldsubinfo;
   final TextEditingController controller;
   final bool isDropDownMenu;
-  final List? listofDropDown;
+  final List<Gender>? listofDropDown;
   final Function()? dropDownAction;
 
   const SpCreateAccountTextfieldWidget({
     super.key,
     required this.controller,
+    required this.validator,
     required this.textfieldTitle,
     this.isDropDownMenu = false,
     this.textfieldsubinfo,
@@ -33,11 +36,10 @@ class _SpCreateAccountTextfieldWidgetState
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
       content: Text("Value-> ${_isDropdownVisible}"),
     ));
-    return () {
-      setState(() {
-        _isDropdownVisible = !_isDropdownVisible;
-      });
-    };
+    setState(() {
+      _isDropdownVisible = !_isDropdownVisible;
+    });
+    return null;
   }
 
   void _selectOption(String option) {
@@ -63,6 +65,8 @@ class _SpCreateAccountTextfieldWidgetState
           onTap: widget.isDropDownMenu ? _toggleDropdown : null,
           child: TextFormField(
             controller: widget.controller,
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            validator: widget.validator,
             decoration: InputDecoration(
               fillColor: ColorRes.spotifyGreyColor,
               filled: true,
@@ -70,6 +74,10 @@ class _SpCreateAccountTextfieldWidgetState
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.r),
               ),
+            ),
+            style: Styles.textstyle(
+              fontSize: 18,
+              color: ColorRes.white,
             ),
           ),
         ),
@@ -81,9 +89,9 @@ class _SpCreateAccountTextfieldWidgetState
               shrinkWrap: true,
               children: widget.listofDropDown!.map((option) {
                 return ListTile(
-                  title: Text(option),
+                  title: Text(option.name),
                   onTap: () {
-                    _selectOption(option);
+                    _selectOption(option.name);
                   },
                 );
               }).toList(),

@@ -5,8 +5,16 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SpCreateAccountPrimaryButton extends StatelessWidget {
   final String buttonName;
+  final Color? buttonColor;
+  final Color? textButtonColor;
   final Function()? onTap;
-  const SpCreateAccountPrimaryButton({super.key, required this.buttonName, this.onTap});
+  const SpCreateAccountPrimaryButton({
+    super.key,
+    required this.buttonName,
+    this.onTap,
+    this.buttonColor,
+    this.textButtonColor,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,14 +26,14 @@ class SpCreateAccountPrimaryButton extends StatelessWidget {
           vertical: 15.h,
         ),
         decoration: BoxDecoration(
-          color: ColorRes.spotifyGreyColor,
+          color: buttonColor ?? ColorRes.spotifyGreyColor,
           borderRadius: BorderRadius.circular(30.r),
         ),
         child: Text(
           buttonName,
           style: Styles.textstyle(
             fontSize: 18,
-            color: ColorRes.black,
+            color: textButtonColor ?? ColorRes.black,
             fontWeight: FontWeight.bold,
           ),
         ),
