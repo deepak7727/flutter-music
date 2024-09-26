@@ -22,7 +22,9 @@ class _SpLoginScreenState extends State<SpLoginScreen> {
         backgroundColor: ColorRes.spotifyBlackColor,
         body: Column(
           children: [
-            Image.asset(ImageRes.sploginBackgroundImage),
+            Expanded(
+              child: Image.asset(ImageRes.sploginBackgroundImage),
+            ),
             Text(
               "Miliions of Songs.",
               style: Styles.textstyle(
@@ -71,8 +73,20 @@ class _SpLoginScreenState extends State<SpLoginScreen> {
                   ),
                   SizedBox(height: 12.h),
                   SpLoginButtonWidget(
+                    buttonName: "Continue with Email",
+                    svgImagePath: ImageRes.spEmailIcon,
+                    invertSvgImage: true,
+                    onTap: () {
+                      Get.toNamed(RouteUtils.signup);
+                    },
+                  ),
+                  SizedBox(height: 12.h),
+                  SpLoginButtonWidget(
                     buttonName: "Log in",
                     borderColor: Colors.transparent,
+                    onTap: () {
+                      Get.toNamed(RouteUtils.login);
+                    },
                   ),
                 ],
               ),

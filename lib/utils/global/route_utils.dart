@@ -34,23 +34,6 @@ class RouteUtils {
     page: () => SplashScreen(),
   );
 
-  static List<GetPage<dynamic>>? get spotifyRoutes {
-    return [
-      GetPage(
-        name: RouteUtils.welomeScreen,
-        page: () => WelcomeSplashScreen(),
-      ),
-      GetPage(
-        name: RouteUtils.spLoginScreen,
-        page: () => SpLoginScreen(),
-      ),
-      GetPage(
-        name: RouteUtils.spCreateAccount,
-        page: () => SpCreateAccountEmailScreen(),
-      ),
-    ];
-  }
-
   static List<GetPage<dynamic>>? get routes {
     return [
       GetPage(
@@ -90,6 +73,20 @@ class RouteUtils {
       GetPage(
         name: RouteUtils.player,
         page: () => PlayerScreen(),
+      ),
+
+      // spotift page
+      GetPage(
+        name: RouteUtils.welomeScreen,
+        page: () => WelcomeSplashScreen(),
+      ),
+      GetPage(
+        name: RouteUtils.spLoginScreen,
+        page: () => SpLoginScreen(),
+      ),
+      GetPage(
+        name: RouteUtils.spCreateAccount,
+        page: () => SpCreateAccountEmailScreen(),
       ),
     ];
   }

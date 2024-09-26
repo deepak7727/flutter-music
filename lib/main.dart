@@ -29,7 +29,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     debugPrint('****** MyAppInitState *****');
-    
+
     super.initState();
   }
 
@@ -49,9 +49,7 @@ class _MyAppState extends State<MyApp> {
               : RouteUtils.splash,
           builder: BotToastInit(),
           navigatorObservers: [BotToastNavigatorObserver()],
-          getPages: widget.isSpotifyUIType
-              ? RouteUtils.spotifyRoutes
-              : RouteUtils.routes,
+          getPages: RouteUtils.routes,
           unknownRoute: RouteUtils.unknownRoute,
         ),
       ),

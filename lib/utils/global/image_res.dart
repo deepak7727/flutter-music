@@ -28,4 +28,5 @@ class ImageRes{
   static final String sploginFacebookIcon = "${iconPath}facebook_svg.svg";
   static final String sploginAppleIcon = "${iconPath}apple_svg.svg";
   static final String spSpotifyIcon = "${imagePath}spotifyLogo.png";
+  static final String spEmailIcon = "${iconPath}email_svg.svg";
 }
