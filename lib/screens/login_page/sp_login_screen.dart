@@ -66,7 +66,6 @@ class _SpLoginScreenState extends State<SpLoginScreen> {
                       padding: EdgeInsets.symmetric(horizontal: 60.w),
                       child: Column(
                         children: [
-                          /// sign up button
                           SpLoginButtonWidget(
                             buttonName: "Sign up free",
                             buttonColor: ColorRes.spotifyPrimaryColor,

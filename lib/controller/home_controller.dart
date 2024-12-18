@@ -13,13 +13,11 @@ class MusicListController extends GetxController {
 
   Future<void> fetchMusic() async {
     await _getMusicFiles();
-    print('aaa **songs.length **** ${songs.length}*** ');
   }
 
   Future<void> _getMusicFiles() async {
     List<SongModel> fetchedSong = await _audioQuery.querySongs();
     songs.value = fetchedSong;
-    print('aaa ******* ${fetchedSong.length} * ${songs.length} * ');
   }
 
   void searchSong({required String query}) {
@@ -34,11 +32,6 @@ class MusicListController extends GetxController {
           .toList();
     }
     foundSongs.value = searchResultSong;
-    print("****************");
-    print('aaa **** query ***** ${ query }');
-    print('aaa **** foundSongs.length ***** ${ foundSongs.length }');
-    print('aaa **** songs.length ***** ${ songs.length }');
-    print("****************");
     foundSongs.refresh();
   }
 }

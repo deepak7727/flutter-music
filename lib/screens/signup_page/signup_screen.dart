@@ -92,9 +92,10 @@ class _SignupScreenState extends State<SignupScreen> {
                                             .instance
                                             .registration(
                                           email: emailController.text.trim(),
-                                          password: passwordController.text.trim(),
+                                          password:
+                                              passwordController.text.trim(),
                                         );
-                                        debugPrint('****** res *****');
+                                        debugPrintLocal('****** res *****');
                                         if (res == "Success") {
                                           showToast(
                                             title: res!,

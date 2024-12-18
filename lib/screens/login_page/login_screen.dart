@@ -100,8 +100,6 @@ class _LoginScreenState extends State<LoginScreen> {
                                               passwordController
                                                   .text.isNotEmpty) {
                                             if (await checkNetwork()) {
-                                              print(
-                                                  'aaa ********* Check Network ${await checkNetwork()}');
                                               BlocProvider.of<
                                                           AuthticationCubit>(
                                                       context)
