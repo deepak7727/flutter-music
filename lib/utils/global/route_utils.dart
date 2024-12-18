@@ -82,7 +82,10 @@ class RouteUtils {
       ),
       GetPage(
         name: RouteUtils.spLoginScreen,
-        page: () => SpLoginScreen(),
+        page: () => BlocProvider(
+          create: (context) => AuthticationCubit(),
+          child: SpLoginScreen(),
+        ),
       ),
       GetPage(
         name: RouteUtils.spCreateAccount,
