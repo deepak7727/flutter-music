@@ -81,7 +81,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             Row(
                               children: [
                                 Expanded(
-                                  child: CustomSquareButton(
+                                  child: EvolvedButton(
                                     text: "Signup",
                                     buttonColor: Colors.white,
                                     textColor: ColorRes.success,

@@ -45,7 +45,7 @@ class _TestPageScreenState extends State<TestPageScreen> {
             }).toList(),
           ),
           actions: [
-            CustomSquareButton(
+            EvolvedButton(
               text: "accept",
               textColor: ColorRes.white,
               buttonColor: ColorRes.danger,
@@ -53,7 +53,7 @@ class _TestPageScreenState extends State<TestPageScreen> {
                 Navigator.pop(context);
               },
             ),
-            CustomSquareButton(
+            EvolvedButton(
               text: "Cancel",
               textColor: ColorRes.black,
               buttonColor: ColorRes.white,

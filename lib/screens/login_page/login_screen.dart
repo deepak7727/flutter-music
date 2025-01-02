@@ -5,6 +5,7 @@ import 'package:flutter_application_1/cubit/authtication/authtication_state.dart
 import 'package:flutter_application_1/models/user_model.dart';
 import 'package:flutter_application_1/screens/loading_page/loading_screen.dart';
 import 'package:flutter_application_1/styles/color_res.dart';
+import 'package:flutter_application_1/styles/styles.dart';
 import 'package:flutter_application_1/utils/common/common_method.dart';
 import 'package:flutter_application_1/utils/common/custome_button_widget.dart';
 import 'package:flutter_application_1/utils/common/glasseffect_widget.dart';
@@ -86,73 +87,54 @@ class _LoginScreenState extends State<LoginScreen> {
                                 prefixIcon: Icons.key_rounded,
                               ),
                               SizedBox(height: 15.h),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: CustomSquareButton(
-                                      text: "Login",
-                                      textColor: ColorRes.white,
-                                      buttonColor:
-                                          const Color.fromRGBO(76, 175, 80, 1),
-                                      onPressed: () async {
-                                        if (loginKey.currentState!.validate()) {
-                                          if (emailController.text.isNotEmpty &&
-                                              passwordController
-                                                  .text.isNotEmpty) {
-                                            if (await checkNetwork()) {
-                                              print(
-                                                  'aaa ********* Check Network ${await checkNetwork()}');
-                                              BlocProvider.of<
-                                                          AuthticationCubit>(
-                                                      context)
-                                                  .Login(
-                                                user: UserModel(
-                                                  userEmail: emailController
-                                                      .text
-                                                      .trim(),
-                                                  password: passwordController
-                                                      .text
-                                                      .trim(),
-                                                ),
-                                              );
-                                            } else {
-                                              showToast(
-                                                title: "No Internt Connection",
-                                                isError: true,
-                                              );
-                                            }
-                                          }
-                                        } else {
-                                          showToast(
-                                              title: "Please Enter Values",
-                                              message:
-                                                  "Enter email or password");
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                ],
+                              EvolvedButton(
+                                text: "Login",
+                                textColor: ColorRes.white,
+                                buttonColor:
+                                    const Color.fromRGBO(76, 175, 80, 1),
+                                onPressed: () async {
+                                  await loginButtonAction();
+                                },
                               ),
                               SizedBox(height: 10.h),
-                              GradientButton(
-                                onPressed: () {
+                              EvolvedButton(
+                                text: "Sign up",
+                                textColor: ColorRes.white,
+                                buttonColor: ColorRes.secondryColorsecond,
+                                onPressed: () async {
                                   Get.toNamed(RouteUtils.signup);
                                 },
-                                text: "Create an account",
-                                gradient: LinearGradient(
-                                  colors: [
-                                    Color(0xFFBDA785),
-                                    ColorRes.tileBackgroundColor,
+                              ),
+                              SizedBox(height: 10.h),
+                              // InkWell(
+                              //   onTap: () {
+                              //     Get.offAllNamed(RouteUtils.home);
+                              //   },
+                              //   child: Icon(
+                              //     Icons.home,
+                              //   ),
+                              // ),
+                              EvolvedButton(
+                                text: "Sign up",
+                                textWidegt: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.home,
+                                      size: 18.h,
+                                    ),
+                                    SizedBox(width: 10.w),
+                                    Text(
+                                      "Go Home",
+                                      style: Styles.textstyle(),
+                                    ),
                                   ],
                                 ),
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Get.offAllNamed(RouteUtils.home);
+                                textColor: ColorRes.white,
+                                buttonColor: ColorRes.secondryColorsecond,
+                                onPressed: () async {
+                                  Get.toNamed(RouteUtils.signup);
                                 },
-                                child: Icon(
-                                  Icons.home,
-                                ),
                               ),
                             ],
                           ),
@@ -168,5 +150,30 @@ class _LoginScreenState extends State<LoginScreen> {
         ],
       );
     });
+  }
+
+  Future<void> loginButtonAction() async {
+    if (loginKey.currentState!.validate()) {
+      if (emailController.text.isNotEmpty &&
+          passwordController.text.isNotEmpty) {
+        if (await checkNetwork()) {
+          print('aaa ********* Check Network ${await checkNetwork()}');
+          BlocProvider.of<AuthticationCubit>(context).Login(
+            user: UserModel(
+              userEmail: emailController.text.trim(),
+              password: passwordController.text.trim(),
+            ),
+          );
+        } else {
+          showToast(
+            title: "No Internt Connection",
+            isError: true,
+          );
+        }
+      }
+    } else {
+      showToast(
+          title: "Please Enter Values", message: "Enter email or password");
+    }
   }
 }

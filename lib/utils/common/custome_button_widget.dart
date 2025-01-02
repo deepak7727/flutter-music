@@ -1,49 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/styles/color_res.dart';
+import 'package:flutter_application_1/styles/styles.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class CustomSquareButton extends StatelessWidget {
+class EvolvedButton extends StatelessWidget {
   final String text;
+  final Widget? textWidegt;
   final EdgeInsets? padding;
-  final VoidCallback onPressed;
-  final Color buttonColor;
-  final Color textColor;
-  final Color borderColor;
-  final double borderWidth;
+  final VoidCallback? onPressed;
+  final Color? buttonColor;
+  final Color? textColor;
+  final Color? borderColor;
+  final double? borderWidth;
 
-  CustomSquareButton({
+  EvolvedButton({
     required this.text,
     this.padding,
-    required this.onPressed,
-    required this.buttonColor,
-    required this.textColor,
+    this.textWidegt,
+    this.onPressed,
+    this.buttonColor,
+    this.textColor,
     this.borderColor = Colors.transparent,
     this.borderWidth = 0.0,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        iconColor: buttonColor,
-        backgroundColor: buttonColor,
-        padding: padding ??
-            EdgeInsets.symmetric(
-              horizontal: 20.w,
-              vertical: 10.h,
-            ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(30.r),
-          side: BorderSide(color: borderColor, width: borderWidth),
-        ),
-        elevation: 5,
-      ),
-      child: Text(
-        text,
-        style: TextStyle(
-          color: textColor,
-          fontSize: 16.0,
-          fontWeight: FontWeight.bold,
+    return InkWell(
+      onTap: onPressed,
+      child: IntrinsicHeight(
+        child: Container(
+          width: double.maxFinite,
+          padding: padding ?? Styles.standardPadding,
+          decoration: BoxDecoration(
+            color: buttonColor ?? ColorRes.white,
+            borderRadius: BorderRadius.circular(20.r),
+          ),
+          child: textWidegt ??
+              Text(
+                text,
+                textAlign: TextAlign.center,
+                style: Styles.textstyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
         ),
       ),
     );
