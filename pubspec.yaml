@@ -25,6 +25,7 @@ dependencies:
   just_audio: ^0.9.39
   flutter_secure_storage: ^9.2.2
   shimmer: ^3.0.0
+  google_sign_in: ^6.2.2
 
 dev_dependencies:
   flutter_test:

@@ -13,7 +13,6 @@ import 'package:flutter_application_1/utils/common/inert_color_text_widget.dart'
 import 'package:flutter_application_1/utils/common/modern_textfield_widget.dart';
 import 'package:flutter_application_1/utils/global/image_res.dart';
 import 'package:flutter_application_1/utils/global/route_utils.dart';
-import 'package:flutter_application_1/utils/common/gradient_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -38,7 +37,10 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) {
       if (state is AuthticationSucess) {
         showToast(title: state.message);
-        // save  to local database
+        Get.offAllNamed(RouteUtils.home);
+      }
+      if (state is GoogleSignInSuccess) {
+        showToast(title: state.displayName, success: true);
         Get.offAllNamed(RouteUtils.home);
       }
       if (state is AuthticationError) {
@@ -57,8 +59,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Center(
                   child: GlassEffectWidget(
-                    height: 400.h,
-                    width: 350.w,
+                    height: 450.h,
+                    width: 300.w,
                     child: Center(
                       child: Container(
                         margin: EdgeInsets.symmetric(
@@ -79,12 +81,18 @@ class _LoginScreenState extends State<LoginScreen> {
                                 controller: emailController,
                                 hintText: "Enter Email",
                                 prefixIcon: Icons.email_outlined,
+                                borderRadius: BorderRadius.circular(30.r),
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 5.w),
                               ),
                               SizedBox(height: 10.h),
                               ModernTextFieldWidget(
                                 controller: passwordController,
                                 hintText: "Enter Password",
                                 prefixIcon: Icons.key_rounded,
+                                borderRadius: BorderRadius.circular(30.r),
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 5.w),
                               ),
                               SizedBox(height: 15.h),
                               EvolvedButton(
@@ -106,16 +114,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 },
                               ),
                               SizedBox(height: 10.h),
-                              // InkWell(
-                              //   onTap: () {
-                              //     Get.offAllNamed(RouteUtils.home);
-                              //   },
-                              //   child: Icon(
-                              //     Icons.home,
-                              //   ),
-                              // ),
                               EvolvedButton(
-                                text: "Sign up",
+                                text: "Go Home",
                                 textWidegt: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
@@ -134,6 +134,30 @@ class _LoginScreenState extends State<LoginScreen> {
                                 buttonColor: ColorRes.secondryColorsecond,
                                 onPressed: () async {
                                   Get.toNamed(RouteUtils.signup);
+                                },
+                              ),
+                              SizedBox(height: 10.h),
+                              EvolvedButton(
+                                text: "Login in by Google",
+                                textWidegt: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.shop,
+                                      size: 18.h,
+                                    ),
+                                    SizedBox(width: 10.w),
+                                    Text(
+                                      "Login in Google",
+                                      style: Styles.textstyle(),
+                                    ),
+                                  ],
+                                ),
+                                textColor: ColorRes.white,
+                                buttonColor: Color(0xFF4285F4),
+                                onPressed: () async {
+                                  BlocProvider.of<AuthticationCubit>(context)
+                                      .signInWithGoogle();
                                 },
                               ),
                             ],

@@ -11,7 +11,6 @@ import 'package:flutter_application_1/utils/common/inert_color_text_widget.dart'
 import 'package:flutter_application_1/utils/common/modern_textfield_widget.dart';
 import 'package:flutter_application_1/utils/global/image_res.dart';
 import 'package:flutter_application_1/utils/global/route_utils.dart';
-import 'package:flutter_application_1/utils/common/gradient_button.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -29,7 +28,9 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthticationCubit, AuthticationState>(
-      listener: (context, state) {},
+      listener: (context, state) {
+        
+      },
       builder: (context, state) {
         return Stack(
           children: [
@@ -54,8 +55,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   Center(
                     child: GlassEffectWidget(
-                      height: 380,
-                      width: 300,
+                      height: 350.h,
+                      width: 300.w,
                       child: Container(
                         margin: EdgeInsets.symmetric(
                           horizontal: 20.w,
@@ -71,61 +72,37 @@ class _SignupScreenState extends State<SignupScreen> {
                             ModernTextFieldWidget(
                               controller: emailController,
                               hintText: "Enter Email",
+                              prefixIcon: Icons.email_outlined,
+                              borderRadius: BorderRadius.circular(30.r),
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 5.w),
                             ),
                             SizedBox(height: 10.h),
                             ModernTextFieldWidget(
                               controller: passwordController,
                               hintText: "Enter Password",
+                              prefixIcon: Icons.key_rounded,
+                              borderRadius: BorderRadius.circular(30.r),
+                              contentPadding:
+                                  EdgeInsets.symmetric(horizontal: 5.w),
                             ),
                             SizedBox(height: 10.h),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: EvolvedButton(
-                                    text: "Signup",
-                                    buttonColor: Colors.white,
-                                    textColor: ColorRes.success,
-                                    onPressed: () async {
-                                      if (emailController.text.isNotEmpty &&
-                                          passwordController.text.isNotEmpty) {
-                                        String? res = await FirebaseAuthService
-                                            .instance
-                                            .registration(
-                                          email: emailController.text.trim(),
-                                          password: passwordController.text.trim(),
-                                        );
-                                        debugPrint('****** res *****');
-                                        if (res == "Success") {
-                                          showToast(
-                                            title: res!,
-                                          );
-                                          Get.offAllNamed(RouteUtils.login);
-                                        } else {
-                                          showToast(title: res!, isError: true);
-                                        }
-                                      } else {
-                                        showToast(
-                                          title: "Please Enter Information",
-                                          message:
-                                              "Pleae Enter Email or Password",
-                                          isError: true,
-                                        );
-                                      }
-                                    },
-                                  ),
-                                ),
-                              ],
+                            EvolvedButton(
+                              text: "Signup",
+                              buttonColor: ColorRes.success,
+                              textColor: ColorRes.white,
+                              onPressed: () async {
+                                await signupButtonAction();
+                              },
                             ),
                             SizedBox(height: 10.h),
-                            GradientButton(
-                              onPressed: () {
+                            EvolvedButton(
+                              text: "Go Login",
+                              buttonColor: ColorRes.secondryColorsecond,
+                              textColor: ColorRes.white,
+                              onPressed: () async {
                                 Get.offAllNamed(RouteUtils.login);
                               },
-                              text: "Go Login",
-                              gradient: LinearGradient(colors: [
-                                Colors.black26,
-                                Colors.black87,
-                              ]),
                             ),
                           ],
                         ),
@@ -140,5 +117,29 @@ class _SignupScreenState extends State<SignupScreen> {
         );
       },
     );
+  }
+
+  Future<void> signupButtonAction() async {
+    if (emailController.text.isNotEmpty && passwordController.text.isNotEmpty) {
+      String? res = await FirebaseAuthService.instance.registration(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+      debugPrint('****** res *****');
+      if (res == "Success") {
+        showToast(
+          title: res!,
+        );
+        Get.offAllNamed(RouteUtils.login);
+      } else {
+        showToast(title: res!, isError: true);
+      }
+    } else {
+      showToast(
+        title: "Please Enter Information",
+        message: "Pleae Enter Email or Password",
+        isError: true,
+      );
+    }
   }
 }
