@@ -7,6 +7,7 @@ class MusicTheme {
   MusicTheme._();
 
   ThemeData lightTheme() => ThemeData(
+        useMaterial3: true,
         appBarTheme: AppBarTheme(
           backgroundColor: ColorRes.primaryColor,
           centerTitle: true,

@@ -6,11 +6,16 @@ class SearchBarTextfield extends StatelessWidget {
   final TextEditingController controller;
   final Function(String value)? onChanged;
   final String hint;
-  const SearchBarTextfield(
-      {super.key,
-      required this.controller,
-      this.onChanged,
-      required this.hint});
+  final Widget? prefixIcon;
+  final Widget? suffixIcon;
+  const SearchBarTextfield({
+    super.key,
+    required this.controller,
+    this.onChanged,
+    this.prefixIcon,
+    this.suffixIcon,
+    required this.hint,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +26,11 @@ class SearchBarTextfield extends StatelessWidget {
         hintText: hint,
         border: InputBorder.none,
         hintStyle: Styles.textstyle(
-            color: ColorRes.white.withOpacity(0.8), fontSize: 20),
+          color: ColorRes.white.withOpacity(0.5),
+          fontSize: 18,
+        ),
+        prefixIcon: prefixIcon,
+        suffixIcon: suffixIcon,
       ),
       cursorColor: ColorRes.white,
       maxLines: 1,

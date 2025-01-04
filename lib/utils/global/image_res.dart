@@ -10,6 +10,8 @@ class ImageRes{
   static final String bg_loginImage = "${imagePath}background_login_img.jpg";
   static final String bg_singupImage = "${imagePath}background_signup_img.jpg";
   static final String logoImage = "${imagePath}music_logo.png";
+  static final String cdImage = "${imagePath}cd_img.png";
+  static final String cd2Image = "${imagePath}cd_img2.png";
 
 // icons
 

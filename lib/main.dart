@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/setting_controller.dart';
 import 'package:flutter_application_1/services/firebase_auth_service.dart';
+import 'package:flutter_application_1/utils/global/image_res.dart';
 import 'package:flutter_application_1/utils/global/route_utils.dart';
 import 'package:flutter_application_1/utils/global/theme/music_theme.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +10,6 @@ import 'package:bot_toast/bot_toast.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   // ------ FIREBASE INITIALIZATION -------------
   await FirebaseAuthService.instance.initalization();
 

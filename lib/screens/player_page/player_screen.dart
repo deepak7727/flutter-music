@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/controller/music_list_controller.dart';
 import 'package:flutter_application_1/screens/player_page/widget/player_action_button.dart';
 import 'package:flutter_application_1/styles/color_res.dart';
 import 'package:flutter_application_1/styles/styles.dart';
@@ -10,9 +11,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:on_audio_query/on_audio_query.dart';
 
 class PlayerScreen extends StatefulWidget {
-  PlayerScreen({
-    super.key,
-  });
+  PlayerScreen({super.key});
 
   @override
   State<PlayerScreen> createState() => _PlayerScreenState();
@@ -20,34 +19,48 @@ class PlayerScreen extends StatefulWidget {
 
 class _PlayerScreenState extends State<PlayerScreen>
     with TickerProviderStateMixin {
+  final MusicListController musicController = Get.put(MusicListController());
+  late AnimationController _animateController;
   final player = AudioPlayer();
-  final SongModel songmodel = Get.arguments as SongModel;
-
+  RxBool isPlaying = false.obs;
   ValueNotifier<Duration?> duration = ValueNotifier(Duration.zero);
   Duration? totalDuration = Duration.zero;
 
   @override
   void initState() {
-    setMusicToPlayer();
+    super.initState();
+    setMusicToPlayer(musicController.currentSong.value!);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       player.positionStream.listen((Duration position) {
         duration.value = position;
       });
     });
-
-    super.initState();
+    _animateController = AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 1),
+    )..repeat();
   }
 
-  void setMusicToPlayer() async {
-    duration.value = await player.setUrl(songmodel.data);
-    totalDuration = Duration(milliseconds: songmodel.duration!);
+  void setMusicToPlayer(SongModel song) async {
+    duration.value = await player.setUrl(song.data);
+    totalDuration = Duration(milliseconds: song.duration!);
     player.play();
+    isPlaying.value = true;
   }
 
   @override
   void dispose() {
     player.stop();
+    _animateController.dispose();
     super.dispose();
+  }
+
+  void toggleAnimation() {
+    if (isPlaying.value) {
+      _animateController.repeat(); // Resume animation
+    } else {
+      _animateController.stop(); // Pause animation
+    }
   }
 
   @override
@@ -58,26 +71,35 @@ class _PlayerScreenState extends State<PlayerScreen>
           padding: Styles.standardPadding,
           child: Column(
             children: [
-              SizedBox(
-                height: 30.h,
-              ),
-              Text(
-                songmodel.displayName,
-                style: Styles.textstyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
+              SizedBox(height: 100.h),
+              // Image.asset(
+              //   ImageRes.cdImage,
+              //   height: 300.h,
+              // ),
+              RotationTransition(
+                turns: _animateController,
+                child: Image.asset(
+                  ImageRes.cdImage,
+                  height: 300.h,
                 ),
               ),
               SizedBox(height: 30.h),
-              Image.asset(
-                ImageRes.loginImage,
-                height: 300.h,
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20.w),
+                child: Obx(
+                  () => Text(
+                    musicController.currentSong.value!.displayName,
+                    style: Styles.textstyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               ),
               Expanded(child: SizedBox()),
               playerButtons(),
-              SizedBox(
-                height: 10.h,
-              ),
+              SizedBox(height: 10.h),
               Padding(
                 padding: EdgeInsets.symmetric(
                   horizontal: 10.w,
@@ -120,27 +142,44 @@ class _PlayerScreenState extends State<PlayerScreen>
     );
   }
 
+  void changeSong({bool preSong = false}) {}
+
   Row playerButtons() {
     return Row(
       children: [
         PlayerActionButton(
           buttonIcon: Icons.skip_previous_outlined,
           buttonName: "Prev",
-        ),
-        PlayerActionButton(
-          buttonIcon: Icons.pause,
-          buttonName: "Pause",
           action: () {
-            if (player.playing) {
-              player.pause();
-            } else {
-              player.play();
-            }
+            musicController.prevSong();
+            setMusicToPlayer(musicController.currentSong.value!);
+            toggleAnimation();
           },
+        ),
+        Obx(
+          () => PlayerActionButton(
+            buttonIcon: isPlaying.value ? Icons.pause : Icons.play_arrow,
+            buttonName: isPlaying.value ? "Pause" : "Play",
+            action: () {
+              if (player.playing) {
+                player.pause();
+                isPlaying.value = false;
+              } else {
+                player.play();
+                isPlaying.value = true;
+              }
+              toggleAnimation();
+            },
+          ),
         ),
         PlayerActionButton(
           buttonIcon: Icons.skip_next_outlined,
           buttonName: "Next",
+          action: () {
+            musicController.nextSong();
+            setMusicToPlayer(musicController.currentSong.value!);
+            toggleAnimation();
+          },
         ),
       ],
     );

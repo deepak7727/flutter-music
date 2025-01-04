@@ -5,6 +5,7 @@ class MusicListController extends GetxController {
   final RxList<SongModel> songs = RxList();
   final OnAudioQuery _audioQuery = OnAudioQuery();
   RxList<SongModel> foundSongs = RxList<SongModel>([]);
+  Rxn<SongModel> currentSong = Rxn<SongModel>();
 
   void onInit() {
     fetchMusic();
@@ -35,10 +36,32 @@ class MusicListController extends GetxController {
     }
     foundSongs.value = searchResultSong;
     print("****************");
-    print('aaa **** query ***** ${ query }');
-    print('aaa **** foundSongs.length ***** ${ foundSongs.length }');
-    print('aaa **** songs.length ***** ${ songs.length }');
+    print('aaa **** query ***** ${query}');
+    print('aaa **** foundSongs.length ***** ${foundSongs.length}');
+    print('aaa **** songs.length ***** ${songs.length}');
     print("****************");
     foundSongs.refresh();
+  }
+
+  // ========================
+  // Player Methods
+
+  void changeSong({required SongModel song}) {
+    // currentSong
+    currentSong.value = song;
+  }
+
+  void prevSong() {
+    int currentSongIndex = songs.indexWhere(
+      (element) => currentSong.value == element,
+    );
+    currentSong.value = songs.elementAt(currentSongIndex - 1);
+  }
+
+  void nextSong() {
+    int currentSongIndex = songs.indexWhere(
+      (element) => currentSong.value == element,
+    );
+    currentSong.value = songs.elementAt(currentSongIndex + 1);
   }
 }

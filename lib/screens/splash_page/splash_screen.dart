@@ -17,6 +17,8 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
+    // loader images
+    // precacheImage(AssetImage(ImageRes.lottieLoading), context); // TODO : Fix this line .. preload thsi image for app lifetimecycle
     Globals.instance.getUserDetails();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
