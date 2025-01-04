@@ -11,6 +11,7 @@ import 'package:flutter_application_1/utils/common/custome_button_widget.dart';
 import 'package:flutter_application_1/utils/common/glasseffect_widget.dart';
 import 'package:flutter_application_1/utils/common/inert_color_text_widget.dart';
 import 'package:flutter_application_1/utils/common/modern_textfield_widget.dart';
+import 'package:flutter_application_1/utils/global/global_res.dart';
 import 'package:flutter_application_1/utils/global/image_res.dart';
 import 'package:flutter_application_1/utils/global/route_utils.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -36,11 +37,18 @@ class _LoginScreenState extends State<LoginScreen> {
     return BlocConsumer<AuthticationCubit, AuthticationState>(
         listener: (context, state) {
       if (state is AuthticationSucess) {
-        showToast(title: state.message);
+        // set user data
+        showBotMessage(title: state.message);
+        Globals.instance.changeUser(emailuser: state.emailuser, write: true);
         Get.offAllNamed(RouteUtils.home);
       }
       if (state is GoogleSignInSuccess) {
-        showToast(title: state.user.displayName.toString(), success: true);
+        // showToast(title: "Login Successfully", success: true);
+        showBotMessage(
+            title: "Login Successfully as ${state.user.displayName}");
+        debugPrintLocal(
+            'aaa **** state.user.displayName ***** ${state.user.displayName}');
+        Globals.instance.changeUser(googleuser: state.user, write: true);
         Get.offAllNamed(RouteUtils.home);
       }
       if (state is AuthticationError) {
@@ -133,7 +141,13 @@ class _LoginScreenState extends State<LoginScreen> {
                                 textColor: ColorRes.white,
                                 buttonColor: ColorRes.secondryColorsecond,
                                 onPressed: () async {
-                                  Get.toNamed(RouteUtils.signup);
+                                  Globals.instance.changeUser(
+                                    emailuser: UserModel(
+                                      userEmail: "Anomus@email.com",
+                                      password: null,
+                                    ),
+                                  );
+                                  Get.offNamed(RouteUtils.home);
                                 },
                               ),
                               SizedBox(height: 10.h),

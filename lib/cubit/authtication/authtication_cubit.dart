@@ -14,8 +14,8 @@ class AuthticationCubit extends Cubit<AuthticationState> {
     emit(AuthticationLoading());
     try {
       String? response = await FirebaseAuthService.instance.login(
-        email: user.userEmail,
-        password: user.password,
+        email: user.userEmail!,
+        password: user.password!,
       );
       if (response == "Success") {
         emit(AuthticationSucess(message: response!, emailuser: user));
@@ -33,8 +33,8 @@ class AuthticationCubit extends Cubit<AuthticationState> {
     emit(AuthticationLoading());
     try {
       String? response = await FirebaseAuthService.instance.registration(
-        email: user.userEmail,
-        password: user.password,
+        email: user.userEmail!,
+        password: user.password!,
       );
       if (response == "Success") {
         emit(AuthticationSucess(message: response!, emailuser: user));

@@ -7,7 +7,7 @@ class EvolvedButton extends StatelessWidget {
   final String text;
   final Widget? textWidegt;
   final EdgeInsets? padding;
-  final VoidCallback? onPressed;
+  final Function()? onPressed;
   final Color? buttonColor;
   final Color? textColor;
   final Color? borderColor;

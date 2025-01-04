@@ -88,7 +88,7 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                             SizedBox(height: 10.h),
                             EvolvedButton(
-                              text: "Signup",
+                              text: "Sign up",
                               buttonColor: ColorRes.success,
                               textColor: ColorRes.white,
                               onPressed: () async {

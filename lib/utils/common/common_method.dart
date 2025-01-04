@@ -13,25 +13,38 @@ void debugPrintLocal(String msg) {
   }
 }
 
-void showToast(
-    {required String title,
-    String? message,
-    bool success = false,
-    bool isError = false}) {
+Future<void> showToast({
+  required String title,
+  String? message,
+  bool success = false,
+  bool isError = false,
+}) async {
   BotToast.showSimpleNotification(
-    backgroundColor: isError ? ColorRes.danger : ColorRes.white,
+    backgroundColor: isError
+        ? ColorRes.danger
+        : success
+            ? ColorRes.success
+            : ColorRes.black,
     title: title,
     titleStyle: isError
         ? Styles.textstyle(color: ColorRes.white, fontSize: 20)
         : success
-            ? Styles.textstyle(color: ColorRes.success, fontSize: 20)
+            ? Styles.textstyle(color: ColorRes.white, fontSize: 20)
             : Styles.textstyle(color: ColorRes.black, fontSize: 20),
     subTitle: message,
     subTitleStyle: isError
         ? Styles.textstyle(color: ColorRes.white, fontSize: 12)
         : success
-            ? Styles.textstyle(color: ColorRes.success, fontSize: 12)
+            ? Styles.textstyle(color: ColorRes.white, fontSize: 12)
             : Styles.textstyle(color: ColorRes.black, fontSize: 12),
+  );
+}
+
+Future<void> showBotMessage({
+  required String title,
+}) async {
+  BotToast.showText(
+    text: title,
   );
 }
 

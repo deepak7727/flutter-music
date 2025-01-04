@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_application_1/utils/common/common_method.dart';
@@ -11,16 +10,6 @@ class FirebaseAuthService {
   Future<void> initalization() async {
     debugPrintLocal('****** FirebaseInitalize  *****');
       await Firebase.initializeApp();
-    // if (Platform.isIOS) {
-    // } else {
-    //   await Firebase.initializeApp(
-    //     options: FirebaseOptions(
-    //         apiKey: "AIzaSyAxm08bUVExh0fiIJkgu80tn_8BMvyEjk0",
-    //         appId: "1:129106982339:android:dc59a2573699fe9bef3976",
-    //         messagingSenderId: "129106982339",
-    //         projectId: "music-player-dc42f"),
-    //   );
-    // }
   }
 
 // Firebase User Registration

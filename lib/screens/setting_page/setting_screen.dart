@@ -4,6 +4,7 @@ import 'package:flutter_application_1/screens/setting_page/widget/setting_list_v
 import 'package:flutter_application_1/styles/color_res.dart';
 import 'package:flutter_application_1/styles/styles.dart';
 import 'package:flutter_application_1/utils/global/enum_res.dart';
+import 'package:flutter_application_1/utils/global/global_res.dart';
 import 'package:flutter_application_1/utils/global/route_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -101,6 +102,8 @@ class _SettingScreenState extends State<SettingScreen> {
           SettingListView(
             settingName: "Logout",
             settingAction: () {
+              // Logout here
+              Globals.instance.logout();
               Get.offAllNamed(RouteUtils.login);
             },
           ),
