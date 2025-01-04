@@ -2,7 +2,7 @@
   "project_info": {
     "project_number": "129106982339",
     "project_id": "music-player-dc42f",
-    "storage_bucket": "music-player-dc42f.appspot.com"
+    "storage_bucket": "music-player-dc42f.firebasestorage.app"
   },
   "client": [
     {
@@ -13,6 +13,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "129106982339-s6tb5540en7el8fv3rues38ocmdf81i4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.deep.music_app",
+            "certificate_hash": "0b218f2070f588502c715f94bae11dc955d09b9e"
+          }
+        },
         {
           "client_id": "129106982339-eej7idlrvlfi2pndqn1k0go0c7nbcnip.apps.googleusercontent.com",
           "client_type": 3

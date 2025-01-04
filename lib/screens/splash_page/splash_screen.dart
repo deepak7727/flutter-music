@@ -22,17 +22,17 @@ class _SplashScreenState extends State<SplashScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(Duration(seconds: 2), () async {
         final flutterStorage = const FlutterSecureStorage();
-        String? currentUser = await flutterStorage.read(
-          key: PrefesRes.userInfo,
-          aOptions: Globals.instance.getAndroidOptions(),
-          iOptions: Globals.instance.getIOSOptions(),
-        );
+        // String? currentUser = await flutterStorage.read(
+        //   key: PrefesRes.emailUserInfo,
+        //   aOptions: Globals.instance.getAndroidOptions(),
+        //   iOptions: Globals.instance.getIOSOptions(),
+        // );
 
-        if (currentUser != null) {
-          Get.offAllNamed(RouteUtils.home);
-        } else {
+        // if (currentUser != null) {
+        //   Get.offAllNamed(RouteUtils.home);
+        // } else {
           Get.offAllNamed(RouteUtils.login);
-        }
+        // }
       });
     });
     super.initState();

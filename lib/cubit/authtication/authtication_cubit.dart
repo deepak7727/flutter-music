@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_1/cubit/authtication/authtication_state.dart';
 import 'package:flutter_application_1/models/user_model.dart';
 import 'package:flutter_application_1/services/firebase_auth_service.dart';
@@ -17,7 +18,7 @@ class AuthticationCubit extends Cubit<AuthticationState> {
         password: user.password,
       );
       if (response == "Success") {
-        emit(AuthticationSucess(message: response!));
+        emit(AuthticationSucess(message: response!, emailuser: user));
       } else {
         emit(AuthticationError(message: response!));
       }
@@ -36,7 +37,7 @@ class AuthticationCubit extends Cubit<AuthticationState> {
         password: user.password,
       );
       if (response == "Success") {
-        emit(AuthticationSucess(message: response!));
+        emit(AuthticationSucess(message: response!, emailuser: user));
       } else {
         emit(AuthticationError(message: response!));
       }
@@ -47,18 +48,26 @@ class AuthticationCubit extends Cubit<AuthticationState> {
   }
 
   // google sign in method
-
   Future<void> signInWithGoogle() async {
     final GoogleSignIn _googleSignIn = GoogleSignIn();
     emit(AuthticationLoading());
     try {
-      final account = await _googleSignIn.signIn();
-      if (account != null) {
-        emit(GoogleSignInSuccess(
-          displayName: account.displayName ?? "No Name",
-          email: account.email,
-          photoUrl: account.photoUrl ?? "",
-        ));
+      final GoogleSignInAccount? gacoount = await _googleSignIn.signIn();
+
+      if (gacoount != null) {
+        final GoogleSignInAuthentication gAuth = await gacoount.authentication;
+        final cread = GoogleAuthProvider.credential(
+          accessToken: gAuth.accessToken,
+          idToken: gAuth.idToken,
+        );
+        UserCredential user =
+            await FirebaseAuth.instance.signInWithCredential(cread);
+
+        if (user.user != null) {
+          emit(GoogleSignInSuccess(user: user.user!));
+        } else {
+          emit(AuthticationError(message: "User Data not found"));
+        }
       } else {
         emit(AuthticationError(message: "Sign-in canceled"));
       }

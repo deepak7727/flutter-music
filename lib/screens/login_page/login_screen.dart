@@ -40,7 +40,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Get.offAllNamed(RouteUtils.home);
       }
       if (state is GoogleSignInSuccess) {
-        showToast(title: state.displayName, success: true);
+        showToast(title: state.user.displayName.toString(), success: true);
         Get.offAllNamed(RouteUtils.home);
       }
       if (state is AuthticationError) {

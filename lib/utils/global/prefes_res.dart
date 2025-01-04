@@ -1,3 +1,4 @@
 class PrefesRes {
-  static const String userInfo = "userInfo";
+  static const String emailUserInfo = "emailUserInfo";
+  static const String googleUserInfo = "googleUserInfo";
 }

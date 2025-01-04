@@ -10,7 +10,7 @@ import 'package:bot_toast/bot_toast.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // ------ FIREBASE INITALIZATION -------------
+  // ------ FIREBASE INITIALIZATION -------------
   await FirebaseAuthService.instance.initalization();
 
   runApp(const MyApp());

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/loading_page/loading_screen.dart';
 import 'package:flutter_application_1/screens/music_list_page/music_list_screen.dart';
 import 'package:flutter_application_1/screens/setting_page/setting_screen.dart';
+import 'package:flutter_application_1/utils/common/common_method.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
