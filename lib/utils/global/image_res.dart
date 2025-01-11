@@ -1,9 +1,8 @@
-String imagePath  = "assets/images/";
-String lottiePath  = "assets/lottie/";
-String iconPath  = "assets/icon/";
+String imagePath = "assets/images/";
+String lottiePath = "assets/lottie/";
+String iconPath = "assets/icon/";
 
-class ImageRes{
-
+class ImageRes {
   // image
   static final String loginImage = "${imagePath}login.png";
   static final String signupImage = "${imagePath}signup.png";
@@ -12,9 +11,9 @@ class ImageRes{
   static final String logoImage = "${imagePath}music_logo.png";
   static final String cdImage = "${imagePath}cd_img.png";
   static final String cd2Image = "${imagePath}cd_img2.png";
+  static final String profileBgImage = "${imagePath}profile_bg_img.png";
 
 // icons
-
 
 // lottie image
   static final String lottieEmptyList = "${lottiePath}lottie1.json";

@@ -2,8 +2,8 @@ import 'package:flutter_application_1/cubit/authtication/authtication_cubit.dart
 import 'package:flutter_application_1/screens/home_page/home_screen.dart';
 import 'package:flutter_application_1/screens/login_page/login_screen.dart';
 import 'package:flutter_application_1/screens/player_page/player_screen.dart';
-import 'package:flutter_application_1/screens/profile_page/profile_screen.dart';
 import 'package:flutter_application_1/screens/search_page/search_screen.dart';
+import 'package:flutter_application_1/screens/setting_page/profile_page/profile_screen.dart';
 import 'package:flutter_application_1/screens/signup_page/signup_screen.dart';
 import 'package:flutter_application_1/screens/splash_page/splash_screen.dart';
 import 'package:flutter_application_1/screens/test_page/test_page_screen.dart';

@@ -18,6 +18,7 @@ class SettingSubItemView extends StatelessWidget {
         margin: EdgeInsets.only(bottom: 2.h),
         padding: Styles.standardBoxPadding,
         decoration: BoxDecoration(
+          color: ColorRes.white,
           boxShadow: [
             BoxShadow(
               color: ColorRes.primaryColor,
@@ -29,12 +30,16 @@ class SettingSubItemView extends StatelessWidget {
           children: [
             Icon(
               titleIcon,
+              color: ColorRes.black,
             ),
             SizedBox(width: 10.w),
             Expanded(
               child: Text(
                 title,
-                style: Theme.of(context).textTheme.bodySmall,
+                // style: Theme.of(context).textTheme.bodySmall,
+                style: Styles.textStyle(
+                  color: ColorRes.black,
+                ),
               ),
             ),
           ],

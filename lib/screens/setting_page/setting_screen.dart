@@ -5,6 +5,7 @@ import 'package:flutter_application_1/styles/color_res.dart';
 import 'package:flutter_application_1/styles/styles.dart';
 import 'package:flutter_application_1/utils/common/common_method.dart';
 import 'package:flutter_application_1/utils/global/enum_res.dart';
+import 'package:flutter_application_1/utils/global/route_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -129,14 +130,15 @@ class _SettingScreenState extends State<SettingScreen> {
                           title: "Profile",
                           titleIcon: Icons.person_2_outlined,
                           onTap: () {
-                            showBotMessage(title: "progile opened");
+                            Get.toNamed(RouteUtils.profile);
                           },
                         ),
                         SettingSubItemView(
                           title: "Edit Profile",
                           titleIcon: Icons.edit,
                           onTap: () {
-                            showBotMessage(title: "edit profile opened");
+                            // for Edit profile navigation page
+                            // Get.toNamed(RouteUtils.profile);
                           },
                         ),
                         SettingSubItemView(
@@ -192,22 +194,22 @@ class _SettingScreenState extends State<SettingScreen> {
                     Column(
                       children: [
                         SettingSubItemView(
-                          title: "My Subsccription",
-                          titleIcon: Icons.person_2_outlined,
+                          title: "My Subscription",
+                          titleIcon: Icons.credit_card,
                           onTap: () {
                             showBotMessage(title: "progile opened");
                           },
                         ),
                         SettingSubItemView(
                           title: "Help",
-                          titleIcon: Icons.edit,
+                          titleIcon: Icons.question_mark_outlined,
                           onTap: () {
                             showBotMessage(title: "edit profile opened");
                           },
                         ),
                         SettingSubItemView(
                           title: "Term and Condition",
-                          titleIcon: Icons.security_outlined,
+                          titleIcon: Icons.error_outline_outlined,
                           onTap: () {
                             showBotMessage(title: "security opened");
                           },
@@ -220,7 +222,7 @@ class _SettingScreenState extends State<SettingScreen> {
               SizedBox(
                 height: 20.h,
               ),
-              // cacje amd cellar
+              // cache amd cellar
               Container(
                 padding: Styles.standardPadding,
                 decoration: BoxDecoration(
@@ -243,14 +245,14 @@ class _SettingScreenState extends State<SettingScreen> {
                       children: [
                         SettingSubItemView(
                           title: "Free up space",
-                          titleIcon: Icons.person_2_outlined,
+                          titleIcon: Icons.delete_outline_outlined,
                           onTap: () {
-                            showBotMessage(title: "progile opened");
+                            showBotMessage(title: "profile opened");
                           },
                         ),
                         SettingSubItemView(
                           title: "Data Saver",
-                          titleIcon: Icons.edit,
+                          titleIcon: Icons.data_exploration_outlined,
                           onTap: () {
                             showBotMessage(title: "edit profile opened");
                           },
@@ -286,21 +288,21 @@ class _SettingScreenState extends State<SettingScreen> {
                       children: [
                         SettingSubItemView(
                           title: "Report a problem",
-                          titleIcon: Icons.person_2_outlined,
+                          titleIcon: Icons.flag_outlined,
                           onTap: () {
                             showBotMessage(title: "progile opened");
                           },
                         ),
                         SettingSubItemView(
-                          title: "Add a account",
-                          titleIcon: Icons.edit,
+                          title: "Add account",
+                          titleIcon: Icons.group_outlined,
                           onTap: () {
                             showBotMessage(title: "edit profile opened");
                           },
                         ),
                         SettingSubItemView(
                           title: "Log out",
-                          titleIcon: Icons.edit,
+                          titleIcon: Icons.logout_outlined,
                           onTap: () {
                             showBotMessage(title: "edit profile opened");
                           },
