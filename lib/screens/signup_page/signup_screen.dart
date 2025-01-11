@@ -28,9 +28,7 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<AuthticationCubit, AuthticationState>(
-      listener: (context, state) {
-        
-      },
+      listener: (context, state) {},
       builder: (context, state) {
         return Stack(
           children: [
@@ -55,8 +53,8 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   Center(
                     child: GlassEffectWidget(
-                      height: 350.h,
-                      width: 300.w,
+                      height: 300.h,
+                      width: 250.w,
                       child: Container(
                         margin: EdgeInsets.symmetric(
                           horizontal: 20.w,

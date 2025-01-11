@@ -31,7 +31,7 @@ class ModernTextFieldWidget extends StatelessWidget {
       decoration: InputDecoration(
         filled: true,
         hintText: hintText,
-        hintStyle: Styles.textstyle(
+        hintStyle: Styles.textStyle(
           color: Colors.grey[600],
         ),
         contentPadding: contentPadding,

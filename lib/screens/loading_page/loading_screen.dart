@@ -23,8 +23,13 @@ class LoadingScreen extends StatelessWidget {
                 ImageRes.lottieLoading,
                 height: 100.h,
               ),
-              SizedBox(height: 20.h,),
-              Text(" loading... ",style: Styles.textstyle(fontSize: 25),),
+              SizedBox(
+                height: 20.h,
+              ),
+              Text(
+                " loading... ",
+                style: Styles.textStyle(fontSize: 25),
+              ),
             ],
           ),
         ),

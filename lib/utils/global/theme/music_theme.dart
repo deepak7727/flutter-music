@@ -25,8 +25,12 @@ class MusicTheme {
         iconTheme: IconThemeData(color: ColorRes.black),
         scaffoldBackgroundColor: ColorRes.scaffoldBackgroundColor,
         textTheme: TextTheme(
-          bodyMedium: TextStyle(fontSize: 16, color: ColorRes.black),
+          bodySmall: TextStyle(fontSize: 12, color: ColorRes.black),
+          bodyMedium: TextStyle(fontSize: 14, color: ColorRes.black),
+          bodyLarge: TextStyle(fontSize: 16, color: ColorRes.black),
         ),
+        primaryColor: ColorRes.primaryColor,
+        secondaryHeaderColor: ColorRes.secondryColor,
         popupMenuTheme: PopupMenuThemeData(color: ColorRes.white),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           type: BottomNavigationBarType.fixed,
@@ -52,11 +56,15 @@ class MusicTheme {
             size: 30,
           ),
         ),
+        primaryColor: ColorRes.black,
+        secondaryHeaderColor: ColorRes.blueGrey,
         useMaterial3: true,
         iconTheme: IconThemeData(color: ColorRes.white),
         scaffoldBackgroundColor: ColorRes.lightBlack,
         textTheme: TextTheme(
-          bodyMedium: TextStyle(fontSize: 16, color: ColorRes.white),
+          bodySmall: TextStyle(fontSize: 12, color: ColorRes.white),
+          bodyMedium: TextStyle(fontSize: 14, color: ColorRes.white),
+          bodyLarge: TextStyle(fontSize: 16, color: ColorRes.white),
         ),
         navigationBarTheme: NavigationBarThemeData(
           backgroundColor: ColorRes.lightBlack,

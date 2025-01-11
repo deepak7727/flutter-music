@@ -44,7 +44,7 @@ class SettingListView extends StatelessWidget {
             ),
             Text(
               settingName,
-              style: Styles.textstyle(
+              style: Styles.textStyle(
                 fontSize: 20,
               ),
             ),

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/controller/setting_controller.dart';
-import 'package:flutter_application_1/screens/setting_page/widget/setting_list_view.dart';
+import 'package:flutter_application_1/screens/setting_page/widget/setting_sub_item_view.dart';
 import 'package:flutter_application_1/styles/color_res.dart';
 import 'package:flutter_application_1/styles/styles.dart';
+import 'package:flutter_application_1/utils/common/common_method.dart';
 import 'package:flutter_application_1/utils/global/enum_res.dart';
-import 'package:flutter_application_1/utils/global/global_res.dart';
-import 'package:flutter_application_1/utils/global/route_utils.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -20,7 +19,7 @@ class _SettingScreenState extends State<SettingScreen> {
   final SettingController settingController = Get.put(SettingController());
   SettingEnum? settingOption;
 
-  @override
+  // @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -55,12 +54,14 @@ class _SettingScreenState extends State<SettingScreen> {
                 child: Row(
                   children: [
                     Get.isDarkMode
-                        ? Icon(Icons.light_mode_outlined)
-                        : Icon(Icons.dark_mode),
+                        ? Icon(Icons.light_mode_outlined,
+                            color: Theme.of(context).iconTheme.color)
+                        : Icon(Icons.dark_mode,
+                            color: Theme.of(context).iconTheme.color),
                     SizedBox(width: 10.w),
                     Text(
                       Get.isDarkMode ? 'Light Mode' : 'Dark Mode',
-                      style: Styles.textstyle(),
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],
                 ),
@@ -69,11 +70,11 @@ class _SettingScreenState extends State<SettingScreen> {
                 value: SettingEnum.optionTwo,
                 child: Row(
                   children: [
-                    Icon(Icons.save),
+                    Icon(Icons.save, color: Theme.of(context).iconTheme.color),
                     SizedBox(width: 10.w),
                     Text(
                       'Save Data',
-                      style: Styles.textstyle(),
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],
                 ),
@@ -82,13 +83,14 @@ class _SettingScreenState extends State<SettingScreen> {
                 value: SettingEnum.optionThree,
                 child: Row(
                   children: [
-                    Icon(Icons.gamepad),
+                    Icon(Icons.gamepad,
+                        color: Theme.of(context).iconTheme.color),
                     SizedBox(
                       width: 10.w,
                     ),
                     Text(
                       'Game Pad',
-                      style: Styles.textstyle(),
+                      style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],
                 ),
@@ -97,45 +99,220 @@ class _SettingScreenState extends State<SettingScreen> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          SettingListView(
-            settingName: "Logout",
-            settingAction: () {
-              // Logout here
-              Globals.instance.logout();
-              Get.offAllNamed(RouteUtils.login);
-            },
+      body: Padding(
+        padding: Styles.standardPadding,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              // account section
+              Container(
+                padding: Styles.standardPadding,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.r),
+                  color: ColorRes.lightBlueGrey,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Account",
+                      style: Styles.textStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: ColorRes.black,
+                      ),
+                    ),
+                    SizedBox(height: 10.h),
+                    Column(
+                      children: [
+                        SettingSubItemView(
+                          title: "Profile",
+                          titleIcon: Icons.person_2_outlined,
+                          onTap: () {
+                            showBotMessage(title: "progile opened");
+                          },
+                        ),
+                        SettingSubItemView(
+                          title: "Edit Profile",
+                          titleIcon: Icons.edit,
+                          onTap: () {
+                            showBotMessage(title: "edit profile opened");
+                          },
+                        ),
+                        SettingSubItemView(
+                          title: "Security",
+                          titleIcon: Icons.security_outlined,
+                          onTap: () {
+                            showBotMessage(title: "security opened");
+                          },
+                        ),
+                        SettingSubItemView(
+                          title: "Notification",
+                          titleIcon: Icons.notifications,
+                          onTap: () {
+                            showBotMessage(title: "notification opened");
+                          },
+                        ),
+                        SettingSubItemView(
+                          title: "Privacy",
+                          titleIcon: Icons.lock_open_outlined,
+                          onTap: () {
+                            showBotMessage(title: "privacy opened");
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+
+              SizedBox(
+                height: 20.h,
+              ),
+
+              // support and abouts
+              Container(
+                padding: Styles.standardPadding,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.r),
+                  color: ColorRes.lightBlueGrey,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Support and About",
+                      style: Styles.textStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: ColorRes.black,
+                      ),
+                    ),
+                    SizedBox(height: 10.h),
+                    Column(
+                      children: [
+                        SettingSubItemView(
+                          title: "My Subsccription",
+                          titleIcon: Icons.person_2_outlined,
+                          onTap: () {
+                            showBotMessage(title: "progile opened");
+                          },
+                        ),
+                        SettingSubItemView(
+                          title: "Help",
+                          titleIcon: Icons.edit,
+                          onTap: () {
+                            showBotMessage(title: "edit profile opened");
+                          },
+                        ),
+                        SettingSubItemView(
+                          title: "Term and Condition",
+                          titleIcon: Icons.security_outlined,
+                          onTap: () {
+                            showBotMessage(title: "security opened");
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              // cacje amd cellar
+              Container(
+                padding: Styles.standardPadding,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.r),
+                  color: ColorRes.lightBlueGrey,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Cache and Cellular",
+                      style: Styles.textStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: ColorRes.black,
+                      ),
+                    ),
+                    SizedBox(height: 10.h),
+                    Column(
+                      children: [
+                        SettingSubItemView(
+                          title: "Free up space",
+                          titleIcon: Icons.person_2_outlined,
+                          onTap: () {
+                            showBotMessage(title: "progile opened");
+                          },
+                        ),
+                        SettingSubItemView(
+                          title: "Data Saver",
+                          titleIcon: Icons.edit,
+                          onTap: () {
+                            showBotMessage(title: "edit profile opened");
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20.h,
+              ),
+              // actions
+              Container(
+                padding: Styles.standardPadding,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.r),
+                  color: ColorRes.lightBlueGrey,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Actions",
+                      style: Styles.textStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: ColorRes.black,
+                      ),
+                    ),
+                    SizedBox(height: 10.h),
+                    Column(
+                      children: [
+                        SettingSubItemView(
+                          title: "Report a problem",
+                          titleIcon: Icons.person_2_outlined,
+                          onTap: () {
+                            showBotMessage(title: "progile opened");
+                          },
+                        ),
+                        SettingSubItemView(
+                          title: "Add a account",
+                          titleIcon: Icons.edit,
+                          onTap: () {
+                            showBotMessage(title: "edit profile opened");
+                          },
+                        ),
+                        SettingSubItemView(
+                          title: "Log out",
+                          titleIcon: Icons.edit,
+                          onTap: () {
+                            showBotMessage(title: "edit profile opened");
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
-          SettingListView(
-            settingName: "Register",
-            settingIcon: Icons.real_estate_agent_rounded,
-            settingAction: () {
-              Get.toNamed(RouteUtils.signup);
-            },
-          ),
-          SettingListView(
-            settingName: "Profile",
-            settingIcon: Icons.person_2_outlined,
-            settingAction: () {
-              Get.toNamed(RouteUtils.profile);
-            },
-          ),
-          SettingListView(
-            settingName: "Tesing",
-            settingIcon: Icons.terrain,
-            settingAction: () {
-              Get.toNamed(RouteUtils.test);
-            },
-          ),
-          SettingListView(
-            settingName: "Color Theme",
-            settingIcon: Icons.terrain,
-            settingAction: () {
-              Get.toNamed(RouteUtils.test);
-            },
-          ),
-        ],
+        ),
       ),
     );
   }

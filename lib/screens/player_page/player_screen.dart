@@ -33,11 +33,29 @@ class _PlayerScreenState extends State<PlayerScreen>
     WidgetsBinding.instance.addPostFrameCallback((_) {
       player.positionStream.listen((Duration position) {
         duration.value = position;
+        // print(duration.value);
+        // print(Duration(
+        //     milliseconds: musicController.currentSong.value!.duration!));
+        print(
+            "${duration.value} ==  ${Duration(milliseconds: musicController.currentSong.value!.duration!)}");
+        // intToDuration(
+        //     Duration(milliseconds: widget.song.duration!).inSeconds)
+
+        if (duration.value ==
+            (Duration(
+                    milliseconds:
+                        musicController.currentSong.value!.duration!) -
+                Duration(milliseconds: 50000))) {
+          showBotMessage(title: "Song finished");
+          print("DEBUG -> Song Ended");
+          musicController.nextSong();
+          setMusicToPlayer(musicController.currentSong.value!);
+        }
       });
     });
     _animateController = AnimationController(
       vsync: this,
-      duration: Duration(seconds: 1),
+      duration: Duration(seconds: 3),
     )..repeat();
   }
 
@@ -72,15 +90,11 @@ class _PlayerScreenState extends State<PlayerScreen>
           child: Column(
             children: [
               SizedBox(height: 100.h),
-              // Image.asset(
-              //   ImageRes.cdImage,
-              //   height: 300.h,
-              // ),
               RotationTransition(
                 turns: _animateController,
                 child: Image.asset(
                   ImageRes.cdImage,
-                  height: 300.h,
+                  height: 150.h,
                 ),
               ),
               SizedBox(height: 30.h),
@@ -89,7 +103,7 @@ class _PlayerScreenState extends State<PlayerScreen>
                 child: Obx(
                   () => Text(
                     musicController.currentSong.value!.displayName,
-                    style: Styles.textstyle(
+                    style: Styles.textStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,
                     ),

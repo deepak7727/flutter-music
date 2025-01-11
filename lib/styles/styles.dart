@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Styles {
-  
-  static EdgeInsets standardPadding = EdgeInsets.all(10.w);
+  static EdgeInsets standardPadding = EdgeInsets.symmetric(
+    horizontal: 14.w,
+    vertical: 14.h,
+  );
 
-  static TextStyle textstyle({
+  static EdgeInsets standardBoxPadding = EdgeInsets.all(5.w);
+
+  static TextStyle textStyle({
     double? fontSize,
     FontWeight? fontWeight,
     Color? color,

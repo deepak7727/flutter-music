@@ -31,7 +31,8 @@ class EvolvedButton extends StatelessWidget {
       child: IntrinsicHeight(
         child: Container(
           width: double.maxFinite,
-          padding: padding ?? Styles.standardPadding,
+          padding:
+              padding ?? EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.h),
           decoration: BoxDecoration(
             color: buttonColor ?? ColorRes.white,
             borderRadius: BorderRadius.circular(20.r),
@@ -40,7 +41,7 @@ class EvolvedButton extends StatelessWidget {
               Text(
                 text,
                 textAlign: TextAlign.center,
-                style: Styles.textstyle(
+                style: Styles.textStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),

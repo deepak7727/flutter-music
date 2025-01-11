@@ -25,7 +25,7 @@ class SearchBarTextfield extends StatelessWidget {
       decoration: InputDecoration(
         hintText: hint,
         border: InputBorder.none,
-        hintStyle: Styles.textstyle(
+        hintStyle: Styles.textStyle(
           color: ColorRes.white.withOpacity(0.5),
           fontSize: 18,
         ),
@@ -34,7 +34,7 @@ class SearchBarTextfield extends StatelessWidget {
       ),
       cursorColor: ColorRes.white,
       maxLines: 1,
-      style: Styles.textstyle(color: ColorRes.white, fontSize: 20),
+      style: Styles.textStyle(color: ColorRes.white, fontSize: 20),
       onChanged: onChanged,
     );
   }

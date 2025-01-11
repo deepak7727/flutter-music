@@ -67,8 +67,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 Center(
                   child: GlassEffectWidget(
-                    height: 450.h,
-                    width: 300.w,
+                    height: 380.h,
+                    width: 250.w,
                     child: Center(
                       child: Container(
                         margin: EdgeInsets.symmetric(
@@ -134,7 +134,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     SizedBox(width: 10.w),
                                     Text(
                                       "Go Home",
-                                      style: Styles.textstyle(),
+                                      style: Styles.textStyle(),
                                     ),
                                   ],
                                 ),
@@ -163,7 +163,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     SizedBox(width: 10.w),
                                     Text(
                                       "Login in Google",
-                                      style: Styles.textstyle(),
+                                      style: Styles.textStyle(),
                                     ),
                                   ],
                                 ),
